@@ -1,0 +1,28 @@
+<% content_for :title, "Lettre #{@newsletter.number}" %>
+
+<div class="container py-5 blog-index">
+  <div class="mb-4">
+    <%= link_to "← Toutes les lettres", newsletters_path, class: "btn btn-outline-primary btn-sm" %>
+  </div>
+
+  <h1 class="blog-index-title">Lettre <%= @newsletter.number %></h1>
+  <p class="newsletter-meta">
+    <%= l(@newsletter.published_on, format: :long) %>
+    <% if @newsletter.liturgical_context.present? %>
+      &nbsp;·&nbsp; <em><%= @newsletter.liturgical_context %></em>
+    <% end %>
+  </p>
+
+  <div class="row g-4 mt-2">
+    <% @posts.each do |post| %>
+      <div class="col-md-6">
+        <%= link_to post, class: "card h-100 post-card text-decoration-none" do %>
+          <div class="card-body">
+            <span class="badge mb-2"><%= post.theme.name %></span>
+            <h5 class="card-title"><%= post.title %></h5>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

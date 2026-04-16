@@ -1,0 +1,32 @@
+<% content_for :title, @post.title %>
+
+<div class="container py-5">
+  <div class="post-show">
+    <div class="mb-3">
+      <span class="post-badge"><%= @post.theme.name %></span>
+    </div>
+    <h1><%= @post.title %></h1>
+    <p class="post-meta mb-4">
+      <%= link_to "Lettre #{@post.newsletter.number}", newsletter_path(@post.newsletter), class: "text-decoration-none" %>
+      &nbsp;·&nbsp; <%= l(@post.newsletter.published_on, format: :long) %>
+      <% if @post.newsletter.liturgical_context.present? %>
+        &nbsp;·&nbsp; <em><%= @post.newsletter.liturgical_context %></em>
+      <% end %>
+    </p>
+
+    <div class="post-content">
+      <%= @post.content %>
+    </div>
+
+    <hr class="mt-5" style="border-color: #0D223F;">
+    <div class="d-flex justify-content-between align-items-center pt-2">
+      <%= link_to "← Retour au blog", posts_path, class: "btn btn-outline-primary btn-sm" %>
+      <% if current_user&.admin? %>
+        <div>
+          <%= link_to "Modifier", edit_post_path(@post), class: "btn btn-outline-secondary btn-sm" %>
+          <%= link_to "Supprimer", @post, data: { turbo_method: :delete, turbo_confirm: "Supprimer cet article ?" }, class: "btn btn-outline-danger btn-sm" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

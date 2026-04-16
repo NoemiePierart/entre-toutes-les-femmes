@@ -1,0 +1,22 @@
+<% content_for :title, @theme.name %>
+
+<div class="container py-5 blog-index">
+  <h1 class="blog-index-title mb-4"><%= @theme.name %></h1>
+
+  <% if @posts.any? %>
+    <div class="row g-4">
+      <% @posts.each do |post| %>
+        <div class="col-md-6 col-lg-4">
+          <%= link_to post, class: "card h-100 post-card text-decoration-none" do %>
+            <div class="card-body">
+              <p class="card-text text-muted small mb-1"><%= l(post.newsletter.published_on, format: :long) %></p>
+              <h5 class="card-title"><%= post.title %></h5>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-muted">Aucun article dans cette rubrique pour le moment.</p>
+  <% end %>
+</div>

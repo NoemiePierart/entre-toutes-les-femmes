@@ -1,12 +1,49 @@
 .navbar-lewagon {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
   justify-content: space-between;
-  background: white;
+  background-color: $cream;
+  border-bottom: 3px double $near-black;
+  padding: 0.75rem 1.5rem;
 }
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.navbar-lewagon .navbar-brand {
+  font-family: $headers-font;
+  font-size: 1.5rem;
+  color: $near-black;
+  font-weight: 400;
+  line-height: 1.1;
+
+  span {
+    display: block;
+    font-style: italic;
+  }
+
+  &:hover {
+    color: $navy;
+  }
+}
+
+.navbar-lewagon .nav-link {
+  font-family: $body-font;
+  color: $near-black;
+  font-size: 1rem;
+
+  &:hover {
+    color: $burgundy;
+  }
+}
+
+.navbar-lewagon .nav-link-subtle {
+  font-size: 0.85rem;
+  color: mix($near-black, white, 40%);
+
+  &:hover {
+    color: $near-black;
+  }
 }

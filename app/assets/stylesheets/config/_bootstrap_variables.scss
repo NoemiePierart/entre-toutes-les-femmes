@@ -7,16 +7,22 @@
 // General style
 $font-family-sans-serif: $body-font;
 $headings-font-family:   $headers-font;
-$body-bg:                $light-gray;
-$font-size-base:         1rem;
+$body-bg:                $cream;
+$font-size-base:         1.125rem;  // 18px
+$line-height-base:       1.4;
 
 // Colors
-$body-color: $gray;
-$primary:    $blue;
-$success:    $green;
-$info:       $yellow;
-$danger:     $red;
-$warning:    $orange;
+$body-color:     $near-black;
+$primary:        $navy;
+$secondary:      $steel-blue;
+$success:        $green;
+$danger:         $red;
+$link-color:     $steel-blue;
+$link-hover-color: $navy;
+
+// Headings
+$headings-color: $navy;
+$headings-font-weight: 400;
 
 // Buttons & inputs' radius
 $border-radius-sm:            .0625rem;
