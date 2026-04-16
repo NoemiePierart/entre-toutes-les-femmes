@@ -1,2 +1,70 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<% content_for :title, "Entre toutes les femmes" %>
+
+<%# Hero %>
+<section class="hero">
+  <div class="hero-inner container">
+    <h1 class="hero-title">
+      Entre toutes<br><em>les femmes</em>
+    </h1>
+    <p class="hero-tagline">Nourrir, encourager, éclairer</p>
+    <p class="hero-description">
+      Une lettre hebdomadaire qui encourage les femmes chrétiennes à vivre leur féminité de manière unifiée,
+      en leur offrant un contenu riche de sens et beau pour nourrir leur être intérieur.
+    </p>
+    <div class="hero-rubriques">
+      <div class="hero-rubrique">
+        <span class="hero-rubrique-name">Qui suis-je&nbsp;?</span>
+        <span class="hero-rubrique-desc">Pour entrer dans le mystère de la vocation féminine avec les lunettes 😎 de la foi, à partir d'écrits philosophiques, théologiques, artistiques.</span>
+      </div>
+      <div class="hero-rubrique">
+        <span class="hero-rubrique-name">Le coin des mamans</span>
+        <span class="hero-rubrique-desc">Des contenus sur-mesure pour s'encourager mutuellement à vivre une maternité exigeante ♥️</span>
+      </div>
+      <div class="hero-rubrique">
+        <span class="hero-rubrique-name">Du grain à moudre</span>
+        <span class="hero-rubrique-desc">Pour faire marcher ensemble la foi et la raison 🤓</span>
+      </div>
+      <div class="hero-rubrique">
+        <span class="hero-rubrique-name">Une œuvre d'art à savourer</span>
+        <span class="hero-rubrique-desc">De la nourriture pour l'âme ✨ — pour le plaisir des yeux, du cœur, de l'esprit ou des oreilles.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# Recent newsletters %>
+<section id="lettres" class="container py-5 blog-index">
+  <% if @newsletters.any? %>
+    <% @newsletters.each do |newsletter| %>
+      <div class="newsletter-block">
+        <div class="newsletter-block-header">
+          <span class="newsletter-block-number">Lettre <%= newsletter.number %></span>
+          <span class="newsletter-block-meta">
+            <%= l(newsletter.published_on, format: :long) %>
+            <% if newsletter.liturgical_context.present? %>
+              &nbsp;·&nbsp; <em><%= newsletter.liturgical_context %></em>
+            <% end %>
+          </span>
+        </div>
+        <div class="row g-3">
+          <% newsletter.posts.each do |post| %>
+            <div class="col-12 col-md-6">
+              <%= link_to post, class: "card h-100 post-card text-decoration-none" do %>
+                <div class="card-body">
+                  <span class="badge mb-2"><%= post.theme.name %></span>
+                  <h5 class="card-title"><%= post.title %></h5>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="text-center mt-5">
+      <%= link_to "Voir la suite", newsletters_path, class: "btn btn-outline-primary" %>
+    </div>
+  <% else %>
+    <p class="text-muted">Aucune lettre pour le moment.</p>
+  <% end %>
+</section>

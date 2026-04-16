@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
+  get "admin", to: redirect("/users/sign_in"), as: :admin_login
+  resources :newsletters, only: [ :index, :show ]
+  resources :themes, only: [ :show ]
+  resources :posts
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

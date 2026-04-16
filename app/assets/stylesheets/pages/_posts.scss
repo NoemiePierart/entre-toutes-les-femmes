@@ -1,0 +1,165 @@
+// Newsletter list
+.newsletter-row {
+  display: block;
+  padding: 1rem 0;
+  border-bottom: 1px solid mix($navy, white, 15%);
+  color: $near-black;
+
+  &:hover .newsletter-row-title {
+    color: $burgundy;
+  }
+}
+
+.newsletter-row-title {
+  font-family: $headers-font;
+  font-size: 1.2rem;
+  color: $navy;
+  transition: color 0.15s ease;
+}
+
+.newsletter-row-meta {
+  font-family: "Courier New", courier, monospace;
+  font-size: 0.85rem;
+  color: mix($near-black, white, 50%);
+}
+
+.newsletter-row-context {
+  font-family: $body-font;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: mix($near-black, white, 55%);
+  margin: 0.2rem 0 0;
+}
+
+.newsletter-meta {
+  font-family: "Courier New", courier, monospace;
+  font-size: 0.9rem;
+  color: mix($near-black, white, 55%);
+  margin-bottom: 0.5rem;
+}
+
+// Blog index
+.blog-index {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.blog-index h1 {
+  font-size: 2.5rem;
+  border-bottom: 1px solid $navy;
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+// Post cards
+.post-card {
+  background: white;
+  border: none;
+  border-top: 3px solid $navy;
+  cursor: pointer;
+  transition: border-top-color 0.15s ease;
+
+  &:hover {
+    border-top-color: $burgundy;
+  }
+
+  .badge {
+    font-family: "Courier New", courier, monospace;
+    font-size: 0.75rem;
+    font-weight: normal;
+    background-color: $cream !important;
+    color: $navy !important;
+    border: 1px solid $navy;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .card-title {
+    font-family: $headers-font;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: $navy;
+  }
+
+  .card-text {
+    font-family: "Courier New", courier, monospace;
+    font-size: 0.85rem;
+  }
+
+  .card-footer {
+    background: white;
+    border-top: 1px solid $cream;
+  }
+}
+
+// Post show
+.post-show {
+  max-width: 720px;
+  margin: 0 auto;
+  background: white;
+  padding: 3rem;
+
+  .post-badge {
+    font-family: "Courier New", courier, monospace;
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: $navy;
+    border: 1px solid $navy;
+    padding: 0.15rem 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 400;
+    color: $navy;
+    border-bottom: 1px solid $navy;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    font-family: "Courier New", courier, monospace;
+    font-size: 0.85rem;
+    color: mix($near-black, white, 50%);
+  }
+
+  // Body text
+  .post-content {
+    font-size: 1.125rem;
+    line-height: 1.5;
+
+    p {
+      margin-bottom: 1.25rem;
+    }
+
+    // Quotes (blockquote or em paragraphs from rich text)
+    blockquote, .quote {
+      font-family: $body-font;
+      color: $burgundy;
+      font-size: 1.1rem;
+      text-align: center;
+      width: 75%;
+      margin: 1.5rem auto;
+      border: none;
+      padding: 0;
+    }
+
+    em {
+      color: $burgundy;
+    }
+
+    strong {
+      color: $navy;
+    }
+
+    ul, ol {
+      padding-left: 1.5rem;
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}

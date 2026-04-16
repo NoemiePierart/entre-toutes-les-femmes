@@ -1,10 +1,12 @@
-// Define variables for your color scheme
+// Newsletter palette
+$cream:       #FFF8E8;  // warm background
+$navy:        #0D223F;  // headings, dividers, primary
+$near-black:  #050000;  // body text
+$burgundy:    #6C1332;  // quotes, accents
+$steel-blue:  #5E8AA2;  // highlighted text, links
 
-// For example:
-$red: #FD1015;
-$blue: #0D6EFD;
-$yellow: #FFC65A;
-$orange: #E67E22;
-$green: #1EDD88;
-$gray: #0E0000;
-$light-gray: #F4F4F4;
+// Legacy / Bootstrap utilities
+$red:         #FD1015;
+$green:       #1EDD88;
+$gray:        $near-black;
+$light-gray:  $cream;

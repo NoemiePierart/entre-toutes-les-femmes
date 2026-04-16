@@ -1,0 +1,17 @@
+<% content_for :title, "Les lettres" %>
+
+<div class="container py-5 blog-index">
+  <h1 class="blog-index-title mb-4">Les lettres</h1>
+
+  <% @newsletters.each do |newsletter| %>
+    <%= link_to newsletter_path(newsletter), class: "newsletter-row text-decoration-none d-block" do %>
+      <div class="d-flex justify-content-between align-items-baseline">
+        <span class="newsletter-row-title">Lettre <%= newsletter.number %></span>
+        <span class="newsletter-row-meta"><%= l(newsletter.published_on, format: :long) %></span>
+      </div>
+      <% if newsletter.liturgical_context.present? %>
+        <p class="newsletter-row-context"><%= newsletter.liturgical_context %></p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

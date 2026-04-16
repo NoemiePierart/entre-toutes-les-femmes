@@ -1,0 +1,177 @@
+// ─── Banner ───────────────────────────────────────────────────
+
+.footer-banner {
+  background-color: $cream;
+  border-top: 3px double $near-black;
+  border-bottom: 1px solid mix($near-black, white, 15%);
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.footer-banner-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footer-banner-title {
+  font-family: $headers-font;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: $navy;
+  margin-bottom: 1rem;
+}
+
+.footer-banner-body {
+  font-family: $body-font;
+  font-size: 1.05rem;
+  color: $near-black;
+  margin-bottom: 0.5rem;
+}
+
+.footer-banner-link {
+  color: $burgundy;
+  text-decoration: none;
+  border-bottom: 1px solid $burgundy;
+
+  &:hover { color: $navy; border-bottom-color: $navy; }
+}
+
+// ─── Site footer ──────────────────────────────────────────────
+
+.site-footer {
+  background-color: $navy;
+  color: $cream;
+  border-top: 3px double $cream;
+}
+
+// Shared input / button inside footer
+%footer-input {
+  font-family: $body-font;
+  font-size: 0.9rem;
+  background: transparent;
+  border: 1px solid mix($near-black, white, 30%);
+  color: $cream;
+  padding: 0.4rem 0.75rem;
+  outline: none;
+
+  &::placeholder { color: mix($cream, $navy, 50%); }
+  &:focus { border-color: $cream; }
+}
+
+%footer-btn {
+  font-family: $body-font;
+  font-size: 0.9rem;
+  background: transparent;
+  border: 1px solid $cream;
+  color: $cream;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover { background: $cream; color: $navy; }
+}
+
+// ─── Main section ─────────────────────────────────────────────
+
+.footer-main {
+  padding: 3rem 0 2.5rem;
+  border-bottom: 1px solid mix($cream, $navy, 15%);
+}
+
+.footer-brand-title {
+  font-family: $headers-font;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0.35rem;
+  em { font-style: italic; }
+}
+
+.footer-brand-tagline {
+  font-family: $body-font;
+  font-size: 0.95rem;
+  color: mix($cream, $navy, 65%);
+  margin-bottom: 1rem;
+}
+
+.footer-brand-email {
+  font-family: "Courier New", courier, monospace;
+  font-size: 0.82rem;
+  color: mix($cream, $navy, 55%);
+  text-decoration: none;
+  &:hover { color: $cream; }
+}
+
+
+.footer-theme-link {
+  display: block;
+  font-family: $body-font;
+  font-size: 0.95rem;
+  color: $cream;
+  text-decoration: none;
+  padding: 0.25rem 0;
+  &:hover { color: mix($cream, $burgundy, 55%); }
+}
+
+
+// ─── Subscription section ─────────────────────────────────────
+
+.footer-subscribe {
+  border-bottom: 1px solid mix($cream, $navy, 15%);
+  padding: 1.5rem 0;
+}
+
+.footer-subscribe-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 2rem;
+}
+
+.footer-subscribe-title {
+  font-family: $headers-font;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: $cream;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.footer-subscribe-desc {
+  font-family: $body-font;
+  font-size: 0.88rem;
+  color: mix($cream, $navy, 60%);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.footer-subscribe-form {
+  display: flex;
+  flex-wrap: nowrap;
+  flex: 0 1 320px;
+  max-width: 320px;
+
+  input[type="email"] {
+    @extend %footer-input;
+    flex: 1 1 0;
+    min-width: 0;
+    border-right: none;
+  }
+
+  button {
+    @extend %footer-btn;
+    flex-shrink: 0;
+    border-left: none;
+    white-space: nowrap;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+// ─── Bottom bar ───────────────────────────────────────────────
+
+.footer-bottom {
+  padding: 1rem 0;
+  font-family: "Courier New", courier, monospace;
+  font-size: 0.78rem;
+  color: mix($cream, $navy, 35%);
+}

@@ -1,1 +1,109 @@
-// Specific CSS for your home-page
+// Hero
+.hero {
+  background-color: $cream;
+  border-bottom: 3px double $near-black;
+  padding: 4rem 1.5rem 3rem;
+  text-align: center;
+}
+
+.hero-inner {
+}
+
+.hero-title {
+  font-family: $headers-font;
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: $near-black;
+  margin-bottom: 1rem;
+
+  em {
+    font-style: italic;
+    color: $near-black;
+  }
+}
+
+.hero-tagline {
+  font-family: $body-font;
+  font-size: 1.1rem;
+  color: mix($near-black, white, 60%);
+  letter-spacing: 0.04em;
+  margin-bottom: 1.75rem;
+}
+
+.hero-description {
+  font-family: $body-font;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: $near-black;
+  margin-bottom: 2.5rem;
+}
+
+.hero-rubriques {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  text-align: left;
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero-rubrique {
+  border-top: 1px solid $navy;
+  padding-top: 0.75rem;
+}
+
+.hero-rubrique-name {
+  display: block;
+  font-family: $headers-font;
+  font-size: 1rem;
+  color: $navy;
+  margin-bottom: 0.25rem;
+}
+
+.hero-rubrique-desc {
+  display: block;
+  font-family: $body-font;
+  font-size: 0.9rem;
+  color: mix($near-black, white, 65%);
+  line-height: 1.4;
+}
+
+// Newsletter blocks on homepage
+.newsletter-block {
+  margin-bottom: 3.5rem;
+}
+
+.newsletter-block-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid $navy;
+  margin-bottom: 1.25rem;
+}
+
+.newsletter-block-number {
+  font-family: $headers-font;
+  font-size: 1.3rem;
+  color: $navy;
+}
+
+.newsletter-block-meta {
+  font-family: "Courier New", courier, monospace;
+  font-size: 0.82rem;
+  color: mix($near-black, white, 50%);
+}
+
+// Letters section title
+.blog-index-title {
+  font-family: $headers-font;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: $navy;
+  border-bottom: 1px solid $navy;
+  padding-bottom: 0.4rem;
+}
