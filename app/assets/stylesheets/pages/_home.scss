@@ -201,6 +201,79 @@
   color: mix($near-black, white, 50%);
 }
 
+// Theme show
+.theme-show-page {
+  background: white;
+  padding: 3rem 0 5rem;
+}
+
+.theme-show-hero-wrap {
+  max-width: 992px;
+  margin: 0 auto 3rem;
+}
+
+.theme-show-hero-frame {
+  position: relative;
+  background-color: $navy;
+  background-size: cover;
+  background-position: center;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 3rem;
+}
+
+.theme-show-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba($navy, 0.28);
+}
+
+.theme-show-desc {
+  background: white;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  border-top: none;
+}
+
+.theme-show-desc-text {
+  font-size: 1.4rem;
+  font-family: $headers-font;
+  font-weight: 400;
+  color: $navy;
+  line-height: 1.7;
+  max-width: 768px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.post-card-title {
+  font-family: $headers-font;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: $navy;
+  margin-bottom: 0.3rem;
+}
+
+.post-card-date {
+  font-family: "Courier New", courier, monospace;
+  font-size: 0.8rem;
+  color: mix($near-black, white, 50%);
+  margin: 0;
+}
+
+.theme-show-posts {
+  max-width: 992px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  .theme-cards {
+    gap: 2.5rem;
+  }
+}
+
 // Letters section title
 .blog-index-title {
   font-family: $headers-font;

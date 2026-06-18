@@ -1,25 +1,49 @@
 <% content_for :title, @theme.name %>
 
-<div class="container py-5 blog-index">
-  <h1 class="blog-index-title mb-4"><%= @theme.name %></h1>
+<div class="theme-show-page">
 
-  <% if @posts.any? %>
-    <div class="row g-4">
-      <% @posts.each do |post| %>
-        <div class="col-md-6 col-lg-4">
-          <%= link_to post, class: "card h-100 post-card text-decoration-none" do %>
-            <% if post.thumbnail.attached? %>
-              <%= image_tag post.thumbnail.variant(resize_to_limit: [800, 400]), class: "card-img-top post-card-thumbnail" %>
-            <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= post.title %></h5>
-              <p class="card-text text-muted small mb-1"><%= l(post.newsletter.published_on, format: :long) %></p>
+  <%# Hero + Description %>
+  <div class="theme-show-hero-wrap">
+    <div class="theme-show-hero-frame" <% if @theme.image.attached? %>style="background-image: url('<%= url_for(@theme.image.variant(resize_to_limit: [1400, 800])) %>')"<% end %>>
+      <div class="theme-show-hero-overlay"></div>
+      <div class="home-hero-content">
+        <h1 class="home-hero-title"><%= @theme.name %></h1>
+      </div>
+    </div>
+    <% if @theme.description.present? %>
+      <div class="theme-show-desc">
+        <h2 class="theme-show-desc-text"><%= @theme.description %></h2>
+      </div>
+    <% end %>
+  </div>
+
+  <%# Posts %>
+  <div class="theme-show-posts">
+    <% if @posts.any? %>
+      <div class="d-flex justify-content-center mb-4">
+        <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
+      </div>
+      <div class="theme-cards">
+        <% @posts.each do |post| %>
+          <%= link_to post, class: "theme-card text-decoration-none" do %>
+            <div class="theme-card-image">
+              <% if post.thumbnail.attached? %>
+                <div class="theme-card-image-bg" style="background-image: url('<%= url_for(post.thumbnail.variant(resize_to_limit: [800, 500])) %>')"></div>
+              <% end %>
+            </div>
+            <div class="theme-card-desc">
+              <h3 class="post-card-title"><%= post.title %></h3>
+              <p class="post-card-date"><%= l(post.newsletter.published_on, format: :long) %></p>
             </div>
           <% end %>
-        </div>
-      <% end %>
-    </div>
-  <% else %>
-    <p class="text-muted">Aucun article dans cette rubrique pour le moment.</p>
-  <% end %>
+        <% end %>
+      </div>
+      <div class="d-flex justify-content-center mt-5">
+        <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
+      </div>
+    <% else %>
+      <p class="text-muted">Aucun article dans cette rubrique pour le moment.</p>
+    <% end %>
+  </div>
+
 </div>

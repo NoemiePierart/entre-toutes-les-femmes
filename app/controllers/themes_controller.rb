@@ -2,7 +2,7 @@ class ThemesController < ApplicationController
   skip_before_action :authenticate_user!
 
   def show
-    @theme = Theme.find(params[:id])
-    @posts = @theme.posts.includes(:newsletter).with_attached_thumbnail.order("newsletters.published_on DESC")
+    @theme = Theme.with_attached_image.find(params[:id])
+    @pagy, @posts = pagy(@theme.posts.includes(:newsletter).with_attached_thumbnail.order("newsletters.published_on DESC"), limit: 20)
   end
 end

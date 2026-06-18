@@ -9,8 +9,8 @@ class NewslettersController < ApplicationController
   end
 
   def show
-    @newsletter = Newsletter.find_by!(number: params[:id])
-    @posts = @newsletter.posts.includes(:theme).with_attached_thumbnail.order("themes.name")
+    @newsletter = Newsletter.includes(cover_image_attachment: :blob).find_by!(number: params[:id])
+    @posts = @newsletter.posts.includes(:theme, :rich_text_content).with_attached_thumbnail.order("themes.name")
   end
 
 end
