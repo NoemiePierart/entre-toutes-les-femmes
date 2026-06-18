@@ -12,22 +12,11 @@
       en leur offrant un contenu riche de sens et beau pour nourrir leur être intérieur.
     </p>
     <div class="hero-rubriques">
-      <div class="hero-rubrique">
-        <span class="hero-rubrique-name">Qui suis-je&nbsp;?</span>
-        <span class="hero-rubrique-desc">Pour entrer dans le mystère de la vocation féminine avec les lunettes 😎 de la foi, à partir d'écrits philosophiques, théologiques, artistiques.</span>
-      </div>
-      <div class="hero-rubrique">
-        <span class="hero-rubrique-name">Le coin des mamans</span>
-        <span class="hero-rubrique-desc">Des contenus sur-mesure pour s'encourager mutuellement à vivre une maternité exigeante ♥️</span>
-      </div>
-      <div class="hero-rubrique">
-        <span class="hero-rubrique-name">Du grain à moudre</span>
-        <span class="hero-rubrique-desc">Pour faire marcher ensemble la foi et la raison 🤓</span>
-      </div>
-      <div class="hero-rubrique">
-        <span class="hero-rubrique-name">Une œuvre d'art à savourer</span>
-        <span class="hero-rubrique-desc">De la nourriture pour l'âme ✨ — pour le plaisir des yeux, du cœur, de l'esprit ou des oreilles.</span>
-      </div>
+      <% @themes.each do |theme| %>
+        <div class="hero-rubrique">
+          <span class="hero-rubrique-name"><%= theme.name %></span>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>
@@ -36,29 +25,30 @@
 <section id="lettres" class="container py-5 blog-index">
   <% if @newsletters.any? %>
     <% @newsletters.each do |newsletter| %>
-      <div class="newsletter-block">
-        <div class="newsletter-block-header">
-          <span class="newsletter-block-number">Lettre <%= newsletter.number %></span>
-          <span class="newsletter-block-meta">
-            <%= l(newsletter.published_on, format: :long) %>
+      <%= link_to newsletter_path(newsletter), class: "newsletter-card text-decoration-none" do %>
+        <% if newsletter.cover_image.attached? %>
+          <div class="newsletter-card-image" style="background-image: url('<%= url_for(newsletter.cover_image.variant(resize_to_limit: [360, 240])) %>')"></div>
+        <% else %>
+          <div class="newsletter-card-image newsletter-card-image--empty"></div>
+        <% end %>
+        <div class="newsletter-card-body">
+          <div class="newsletter-card-meta">
+            <span class="newsletter-card-number">Lettre <%= newsletter.number %></span>
+            <span class="newsletter-card-date"><%= l(newsletter.published_on, format: :long) %></span>
             <% if newsletter.liturgical_context.present? %>
-              &nbsp;·&nbsp; <em><%= newsletter.liturgical_context %></em>
+              <em class="newsletter-card-context"><%= newsletter.liturgical_context %></em>
             <% end %>
-          </span>
+          </div>
+          <ul class="newsletter-card-posts">
+            <% newsletter.posts.each do |post| %>
+              <li>
+                <span class="newsletter-card-post-theme"><%= post.theme.name %></span>
+                <%= post.title %>
+              </li>
+            <% end %>
+          </ul>
         </div>
-        <div class="row g-3">
-          <% newsletter.posts.each do |post| %>
-            <div class="col-12 col-md-6">
-              <%= link_to post, class: "card h-100 post-card text-decoration-none" do %>
-                <div class="card-body">
-                  <span class="badge mb-2"><%= post.theme.name %></span>
-                  <h5 class="card-title"><%= post.title %></h5>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
 
     <div class="text-center mt-5">

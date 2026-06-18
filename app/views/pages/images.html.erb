@@ -1,0 +1,21 @@
+<% content_for :title, "Index des images" %>
+
+<div class="container py-5">
+  <h1 class="mb-1" style="font-size: 1.75rem;">Index des images</h1>
+  <p class="text-muted mb-4"><%= @posts.count %> images</p>
+
+  <div class="row g-3">
+    <% @posts.each do |post| %>
+      <div class="col-6 col-md-4 col-lg-3">
+        <a href="<%= url_for(post) %>" target="_blank" class="d-block text-decoration-none">
+          <%= image_tag post.thumbnail, class: "img-fluid w-100", style: "height: 160px; object-fit: cover; object-position: center top;" %>
+        </a>
+        <div class="mt-1" style="font-size: 0.75rem; color: #666;">
+          <span style="font-family: 'Courier New', monospace;">Lettre <%= post.newsletter.number %></span>
+          &middot; <%= post.theme.name %>
+          <div class="text-truncate"><%= post.title %></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

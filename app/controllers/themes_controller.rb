@@ -3,6 +3,6 @@ class ThemesController < ApplicationController
 
   def show
     @theme = Theme.find(params[:id])
-    @posts = @theme.posts.includes(:newsletter).order("newsletters.published_on DESC")
+    @posts = @theme.posts.includes(:newsletter).with_attached_thumbnail.order("newsletters.published_on DESC")
   end
 end

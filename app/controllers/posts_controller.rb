@@ -44,6 +44,8 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: "Cet article n'existe pas ou a été supprimé."
   end
 
   def post_params

@@ -4,14 +4,33 @@
   <h1 class="blog-index-title mb-4">Les lettres</h1>
 
   <% @newsletters.each do |newsletter| %>
-    <%= link_to newsletter_path(newsletter), class: "newsletter-row text-decoration-none d-block" do %>
-      <div class="d-flex justify-content-between align-items-baseline">
-        <span class="newsletter-row-title">Lettre <%= newsletter.number %></span>
-        <span class="newsletter-row-meta"><%= l(newsletter.published_on, format: :long) %></span>
-      </div>
-      <% if newsletter.liturgical_context.present? %>
-        <p class="newsletter-row-context"><%= newsletter.liturgical_context %></p>
+    <%= link_to newsletter_path(newsletter), class: "newsletter-card text-decoration-none" do %>
+      <% if newsletter.cover_image.attached? %>
+        <div class="newsletter-card-image" style="background-image: url('<%= url_for(newsletter.cover_image.variant(resize_to_limit: [360, 240])) %>')"></div>
+      <% else %>
+        <div class="newsletter-card-image newsletter-card-image--empty"></div>
       <% end %>
+      <div class="newsletter-card-body">
+        <div class="newsletter-card-number">Lettre <%= newsletter.number %></div>
+        <div class="newsletter-card-date">
+          <%= l(newsletter.published_on, format: :long) %>
+          <% if newsletter.liturgical_context.present? %>
+            &nbsp;·&nbsp; <em><%= newsletter.liturgical_context %></em>
+          <% end %>
+        </div>
+        <div class="newsletter-card-posts-grid">
+          <% newsletter.posts.sort_by { |p| p.theme.id }.each do |post| %>
+            <div class="newsletter-card-post">
+              <span class="newsletter-card-post-theme"><%= post.theme.name %></span>
+              <span class="newsletter-card-post-title"><%= post.title %></span>
+            </div>
+          <% end %>
+        </div>
+      </div>
     <% end %>
   <% end %>
+
+  <div class="d-flex justify-content-center mt-5">
+    <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
+  </div>
 </div>

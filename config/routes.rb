@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :newsletters, only: [ :index, :show ]
   resources :themes, only: [ :show ]
   resources :posts
+  get "images", to: "pages#images", as: :images_index
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

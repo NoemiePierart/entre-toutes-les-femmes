@@ -17,6 +17,9 @@
     <% @posts.each do |post| %>
       <div class="col-md-6">
         <%= link_to post, class: "card h-100 post-card text-decoration-none" do %>
+          <% if post.thumbnail.attached? %>
+            <%= image_tag post.thumbnail.variant(resize_to_limit: [800, 400]), class: "card-img-top post-card-thumbnail" %>
+          <% end %>
           <div class="card-body">
             <span class="badge mb-2"><%= post.theme.name %></span>
             <h5 class="card-title"><%= post.title %></h5>
