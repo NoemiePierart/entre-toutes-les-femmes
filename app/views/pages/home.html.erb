@@ -1,60 +1,78 @@
 <% content_for :title, "Entre toutes les femmes" %>
 
-<%# Hero %>
-<section class="hero">
-  <div class="hero-inner container">
-    <h1 class="hero-title">
-      Entre toutes<br><em>les femmes</em>
-    </h1>
-    <p class="hero-tagline">Nourrir, encourager, éclairer</p>
-    <p class="hero-description">
-      Une lettre hebdomadaire qui encourage les femmes chrétiennes à vivre leur féminité de manière unifiée,
-      en leur offrant un contenu riche de sens et beau pour nourrir leur être intérieur.
-    </p>
-    <div class="hero-rubriques">
+<%# SECTION 1 — Hero %>
+<section class="home-hero">
+  <div class="container">
+    <div class="home-hero-frame" <% if @hero_newsletter&.cover_image&.attached? %>style="background-image: url('<%= url_for(@hero_newsletter.cover_image.variant(resize_to_limit: [1400, 900])) %>')"<% end %>>
+      <div class="home-hero-overlay"></div>
+      <div class="home-hero-content">
+        <h1 class="home-hero-title">Entre toutes<br><em>les femmes</em></h1>
+        <p class="home-hero-tagline">Nourrir, encourager, éclairer</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# SECTION 2 — Rubriques %>
+<section class="home-rubriques">
+  <div class="container">
+    <h2 class="home-section-title"><i class="fa-solid fa-quote-left home-section-icon"></i> Encourager les femmes chrétiennes à vivre leur féminité de manière unifiée, en leur offrant un contenu riche de sens et beau</h2>
+    <div class="theme-cards">
       <% @themes.each do |theme| %>
-        <div class="hero-rubrique">
-          <span class="hero-rubrique-name"><%= theme.name %></span>
-        </div>
+        <%= link_to theme_path(theme), class: "theme-card text-decoration-none" do %>
+          <div class="theme-card-image">
+            <% if theme.image.attached? %>
+              <div class="theme-card-image-bg" style="background-image: url('<%= url_for(theme.image.variant(resize_to_limit: [800, 500])) %>')"></div>
+            <% end %>
+            <div class="theme-card-inner-border"></div>
+            <h3 class="theme-card-title"><%= theme.name %></h3>
+          </div>
+          <% if theme.description.present? %>
+            <p class="theme-card-desc"><%= theme.description %></p>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
   </div>
 </section>
 
-<%# Recent newsletters %>
-<section id="lettres" class="container py-5 blog-index">
-  <% if @newsletters.any? %>
-    <% @newsletters.each do |newsletter| %>
-      <%= link_to newsletter_path(newsletter), class: "newsletter-card text-decoration-none" do %>
-        <% if newsletter.cover_image.attached? %>
-          <div class="newsletter-card-image" style="background-image: url('<%= url_for(newsletter.cover_image.variant(resize_to_limit: [360, 240])) %>')"></div>
-        <% else %>
-          <div class="newsletter-card-image newsletter-card-image--empty"></div>
+<%# SECTION 3 — Newsletters %>
+<section class="home-newsletters">
+  <div class="container">
+    <h2 class="home-section-title"><i class="fa-regular fa-envelope home-section-icon"></i> Une lettre hebdomadaire pour nourrir l'être intérieur</h2>
+    <% if @newsletters.any? %>
+      <div class="home-newsletter-grid">
+        <% @newsletters.each do |newsletter| %>
+          <%= link_to newsletter_path(newsletter), class: "newsletter-card text-decoration-none" do %>
+            <div class="newsletter-card-image<%= ' newsletter-card-image--empty' unless newsletter.cover_image.attached? %>"
+                 <% if newsletter.cover_image.attached? %>style="background-image: url('<%= url_for(newsletter.cover_image.variant(resize_to_limit: [360, 240])) %>')"<% end %>>
+              <div class="newsletter-card-inner-border"></div>
+              <div class="newsletter-card-image-overlay">
+                <div class="newsletter-card-number">Lettre <%= newsletter.number %></div>
+                <div class="newsletter-card-date"><%= l(newsletter.published_on, format: :long) %></div>
+              </div>
+            </div>
+            <div class="newsletter-card-body">
+              <% if newsletter.liturgical_context.present? %>
+                <div class="newsletter-card-meta">
+                  <em class="newsletter-card-context"><%= newsletter.liturgical_context %></em>
+                </div>
+              <% end %>
+              <div class="newsletter-card-posts-grid">
+                <% newsletter.posts.sort_by { |p| p.theme.id }.each do |post| %>
+                  <div class="newsletter-card-post">
+                    <span class="newsletter-card-post-theme"><%= post.theme.name %></span>
+                    <span class="newsletter-card-post-title"><%= post.title %></span>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
         <% end %>
-        <div class="newsletter-card-body">
-          <div class="newsletter-card-meta">
-            <span class="newsletter-card-number">Lettre <%= newsletter.number %></span>
-            <span class="newsletter-card-date"><%= l(newsletter.published_on, format: :long) %></span>
-            <% if newsletter.liturgical_context.present? %>
-              <em class="newsletter-card-context"><%= newsletter.liturgical_context %></em>
-            <% end %>
-          </div>
-          <ul class="newsletter-card-posts">
-            <% newsletter.posts.each do |post| %>
-              <li>
-                <span class="newsletter-card-post-theme"><%= post.theme.name %></span>
-                <%= post.title %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+      </div>
+      <div class="home-more">
+        <%= link_to "Voir toutes les lettres", newsletters_path, class: "btn btn-outline-primary" %>
+      </div>
     <% end %>
-
-    <div class="text-center mt-5">
-      <%= link_to "Voir la suite", newsletters_path, class: "btn btn-outline-primary" %>
-    </div>
-  <% else %>
-    <p class="text-muted">Aucune lettre pour le moment.</p>
-  <% end %>
+  </div>
 </section>

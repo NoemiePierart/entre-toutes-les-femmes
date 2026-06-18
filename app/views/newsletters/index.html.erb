@@ -5,19 +5,20 @@
 
   <% @newsletters.each do |newsletter| %>
     <%= link_to newsletter_path(newsletter), class: "newsletter-card text-decoration-none" do %>
-      <% if newsletter.cover_image.attached? %>
-        <div class="newsletter-card-image" style="background-image: url('<%= url_for(newsletter.cover_image.variant(resize_to_limit: [360, 240])) %>')"></div>
-      <% else %>
-        <div class="newsletter-card-image newsletter-card-image--empty"></div>
-      <% end %>
-      <div class="newsletter-card-body">
-        <div class="newsletter-card-number">Lettre <%= newsletter.number %></div>
-        <div class="newsletter-card-date">
-          <%= l(newsletter.published_on, format: :long) %>
-          <% if newsletter.liturgical_context.present? %>
-            &nbsp;·&nbsp; <em><%= newsletter.liturgical_context %></em>
-          <% end %>
+      <div class="newsletter-card-image<%= ' newsletter-card-image--empty' unless newsletter.cover_image.attached? %>"
+           <% if newsletter.cover_image.attached? %>style="background-image: url('<%= url_for(newsletter.cover_image.variant(resize_to_limit: [360, 240])) %>')"<% end %>>
+        <div class="newsletter-card-inner-border"></div>
+        <div class="newsletter-card-image-overlay">
+          <div class="newsletter-card-number">Lettre <%= newsletter.number %></div>
+          <div class="newsletter-card-date"><%= l(newsletter.published_on, format: :long) %></div>
         </div>
+      </div>
+      <div class="newsletter-card-body">
+        <% if newsletter.liturgical_context.present? %>
+          <div class="newsletter-card-meta">
+            <em class="newsletter-card-context"><%= newsletter.liturgical_context %></em>
+          </div>
+        <% end %>
         <div class="newsletter-card-posts-grid">
           <% newsletter.posts.sort_by { |p| p.theme.id }.each do |post| %>
             <div class="newsletter-card-post">

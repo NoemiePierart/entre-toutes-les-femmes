@@ -16,19 +16,54 @@ bin/brakeman --quiet --no-pager  # Static security analysis
 
 Run a single test file:
 ```bash
-bin/rails test test/models/user_test.rb
+bin/rails test test/models/post_test.rb
+```
+
+Seed the database (idempotent, safe to re-run):
+```bash
+bin/rails db:seed
 ```
 
 ## Architecture
 
-This is a Rails 8.1 app bootstrapped from the [Le Wagon devise template](https://github.com/lewagon/rails-templates). Stack: PostgreSQL, Hotwire (Turbo + Stimulus), importmap, Bootstrap 5.3, Devise, SimpleForm, Font Awesome.
+Rails 8.1 app. Stack: PostgreSQL, Hotwire (Turbo + Stimulus), importmap, Bootstrap 5.3, Devise, SimpleForm, ActionText, Font Awesome.
 
-**Authentication**: Devise is configured with `before_action :authenticate_user!` on `ApplicationController`, so all routes require login by default. Individual controllers opt out with `skip_before_action :authenticate_user!, only: [...]`. The home page (`PagesController#home`) is publicly accessible.
+### Data model
 
-**Stylesheet structure**: `app/assets/stylesheets/application.scss` is the entry point. It imports in order: config (fonts, colors, Bootstrap variables overrides), Bootstrap + Font Awesome, then component and page partials under `components/` and `pages/`.
+The core content model is: **Newsletter → Posts ← Theme**. A `Newsletter` is a numbered edition published on a date (with an optional liturgical context). Each `Post` belongs to exactly one `Newsletter` and one `Theme`, and has a rich-text `content` (ActionText). A `User` authors posts. The four themes seeded by default are: *Qui suis-je ?*, *Le coin des mamans*, *Du grain à moudre*, *Une œuvre d'art à savourer*.
 
-**Layout**: `app/views/layouts/application.html.erb` renders `shared/_navbar` and `shared/_flashes` on every page. The navbar conditionally shows authenticated vs. guest links via `user_signed_in?`.
+`Newsletter` overrides `to_param` to use `number` instead of `id`, so URLs are `/newsletters/36` not `/newsletters/1`.
 
-**Routes**: Currently minimal — Devise routes + root → `pages#home`. New features should be added here.
+### Authorization
 
-**CI pipeline** (`bin/ci`): runs setup → rubocop → bundler-audit → importmap audit → brakeman → rails test → system tests → seed test. All steps must pass before merging.
+Devise handles authentication. `ApplicationController` enforces `before_action :authenticate_user!` globally. Controllers opt out with `skip_before_action`. Write actions on `PostsController` use a custom `require_admin!` guard that checks `current_user&.admin?` — there is no authorization gem. The `admin` boolean is a column on `users`.
+
+Public (no login required): `pages#home`, `newsletters#index`, `newsletters#show`, `themes#show`, `posts#show`.
+
+The seed admin credentials are `admin@entretouteslesfemmes.fr` / `password123`.
+
+### Navigation
+
+`ApplicationController#set_nav_themes` runs on every request and assigns `@nav_themes = Theme.order(:id)`, which the shared navbar uses to build the theme navigation links dynamically. When adding a new theme, it appears in the nav automatically.
+
+### Stylesheet structure
+
+`app/assets/stylesheets/application.scss` is the entry point. Import order: `config/` (fonts, colors, Bootstrap variable overrides) → Bootstrap + Font Awesome → `components/` → `pages/`. Add new component styles in `components/`, page-specific styles in `pages/`, and register them in the corresponding `_index.scss`.
+
+The design palette is defined in `config/_colors.scss`: `$cream` (background), `$navy` (headings), `$burgundy` (accents), `$steel-blue` (links).
+
+### Locale
+
+The app is entirely in French (`config.i18n.default_locale = :fr`). All user-facing text — flash messages, labels, UI copy — must be written in French. Date formatting uses the `fr.yml` locale file; use `l(date, format: :long)` in views.
+
+### Local environment
+
+`dotenv-rails` loads `.env` in all environments. Because `.env` contains a production `DATABASE_URL`, a `.env.development` file (gitignored) must exist locally to override it:
+
+```
+DATABASE_URL=postgresql://localhost/entre_toutes_les_femmes_development
+```
+
+### CI pipeline
+
+`bin/ci` runs: setup → rubocop → bundler-audit → importmap audit → brakeman → rails test → system tests → seed test. All steps must pass before merging.
