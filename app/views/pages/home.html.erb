@@ -39,7 +39,7 @@
 <%# SECTION 3 — Newsletters %>
 <section class="home-newsletters">
   <div class="container">
-    <h2 class="home-section-title"><i class="fa-regular fa-envelope home-section-icon"></i> Une lettre hebdomadaire pour nourrir l'être intérieur</h2>
+    <h2 class="home-section-title">Une lettre hebdomadaire pour nourrir l'être intérieur</h2>
     <% if @newsletters.any? %>
       <div class="home-newsletter-grid">
         <% @newsletters.each do |newsletter| %>
@@ -71,7 +71,7 @@
         <% end %>
       </div>
       <div class="home-more">
-        <%= link_to "Voir toutes les lettres", newsletters_path, class: "btn btn-outline-primary" %>
+        <%= link_to "Voir toutes les lettres", newsletters_path, class: "btn-primary" %>
       </div>
     <% end %>
   </div>

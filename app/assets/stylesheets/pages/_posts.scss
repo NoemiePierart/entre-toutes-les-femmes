@@ -13,6 +13,11 @@
   &:hover {
     box-shadow: 0 2px 12px rgba($navy, 0.1);
   }
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    gap: 0;
+  }
 }
 
 .newsletter-card-image {
@@ -27,6 +32,11 @@
 
   &--empty {
     background-color: mix($navy, white, 8%);
+  }
+
+  @media (max-width: 576px) {
+    width: 100%;
+    min-height: 200px;
   }
 }
 

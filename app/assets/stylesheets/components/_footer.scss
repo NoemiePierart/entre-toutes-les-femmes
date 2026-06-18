@@ -1,38 +1,58 @@
-// ─── Banner ───────────────────────────────────────────────────
+// ─── Subscribe card ───────────────────────────────────────────
 
-.footer-banner {
-  background-color: $cream;
-  border-top: 3px double $near-black;
-  border-bottom: 1px solid mix($near-black, white, 15%);
-  padding: 3rem 1.5rem;
+.footer-subscribe-card-wrap {
+  background: white;
+  padding: 3rem 0;
+}
+
+.footer-subscribe-card {
+  border: 1.5px solid $steel-blue;
+  border-radius: 10px;
+  padding: 2.5rem 3rem;
+  margin-bottom: 2.5rem;
   text-align: center;
 }
 
-.footer-banner-inner {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.footer-banner-title {
+.footer-subscribe-card-title {
   font-family: $headers-font;
   font-size: 1.5rem;
   font-weight: 400;
   color: $navy;
-  margin-bottom: 1rem;
+  margin-bottom: 0.4rem;
+
+  i { color: $steel-blue; margin-right: 0.4rem; }
 }
 
-.footer-banner-body {
+.footer-subscribe-card-tagline {
   font-family: $body-font;
-  font-size: 1.05rem;
-  color: $near-black;
-  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: mix($near-black, white, 55%);
+  margin-bottom: 1.25rem;
 }
 
-.footer-banner-link {
+.footer-subscribe-card-banner {
+  text-align: center;
+}
+
+.footer-subscribe-card-banner-title {
+  font-family: $headers-font;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: $navy;
+  margin-bottom: 0.75rem;
+}
+
+.footer-subscribe-card-banner-body {
+  font-family: $body-font;
+  font-size: 0.95rem;
+  color: mix($near-black, white, 65%);
+  margin-bottom: 0.35rem;
+}
+
+.footer-subscribe-card-link {
   color: $burgundy;
   text-decoration: none;
   border-bottom: 1px solid $burgundy;
-
   &:hover { color: $navy; border-bottom-color: $navy; }
 }
 
@@ -102,6 +122,14 @@
 }
 
 
+.footer-col-title {
+  font-family: $headers-font;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: $cream;
+  margin-bottom: 0.75rem;
+}
+
 .footer-theme-link {
   display: block;
   font-family: $body-font;
@@ -113,58 +141,75 @@
 }
 
 
-// ─── Subscription section ─────────────────────────────────────
-
-.footer-subscribe {
-  border-bottom: 1px solid mix($cream, $navy, 15%);
-  padding: 1.5rem 0;
-}
-
-.footer-subscribe-inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 2rem;
-}
-
-.footer-subscribe-title {
-  font-family: $headers-font;
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: $cream;
-  margin: 0;
-  white-space: nowrap;
-}
-
-.footer-subscribe-desc {
-  font-family: $body-font;
-  font-size: 0.88rem;
-  color: mix($cream, $navy, 60%);
-  margin: 0;
-  white-space: nowrap;
-}
+// ─── Subscribe form (light background) ───────────────────────
 
 .footer-subscribe-form {
   display: flex;
-  flex-wrap: nowrap;
-  flex: 0 1 320px;
-  max-width: 320px;
+  justify-content: center;
+  max-width: 420px;
+  margin: 0 auto;
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+
+    input[type="email"] { border-right: 1px solid mix($navy, white, 35%); border-bottom: none; }
+    button { border-top: none; }
+  }
 
   input[type="email"] {
-    @extend %footer-input;
-    flex: 1 1 0;
+    font-family: $body-font;
+    font-size: 0.9rem;
+    flex: 1;
     min-width: 0;
+    background: white;
+    border: 1px solid mix($navy, white, 35%);
     border-right: none;
+    color: $near-black;
+    padding: 0.5rem 0.75rem;
+    outline: none;
+
+    &::placeholder { color: mix($near-black, white, 35%); }
+    &:focus { border-color: $steel-blue; }
   }
 
   button {
-    @extend %footer-btn;
-    flex-shrink: 0;
-    border-left: none;
+    font-family: $body-font;
+    font-size: 0.9rem;
+    background: $navy;
+    border: 1px solid $navy;
+    color: $cream;
+    padding: 0.5rem 1.25rem;
     white-space: nowrap;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+
+    &:hover { background: $steel-blue; border-color: $steel-blue; }
   }
+}
+
+// ─── Footer email row ─────────────────────────────────────────
+
+.footer-email-row {
+  text-align: center;
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid mix($cream, $navy, 15%);
+}
+
+.footer-email-link {
+  font-family: "Courier New", courier, monospace;
+  font-size: 1rem;
+  color: $cream;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+
+  i {
+    margin-right: 0.5rem;
+    color: $cream;
+    font-size: 1.1em;
+  }
+
+  &:hover { color: $steel-blue; }
 }
 
 // ─── Bottom bar ───────────────────────────────────────────────
@@ -174,4 +219,5 @@
   font-family: "Courier New", courier, monospace;
   font-size: 0.78rem;
   color: mix($cream, $navy, 35%);
+  text-align: center;
 }

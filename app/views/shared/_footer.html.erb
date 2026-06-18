@@ -1,29 +1,29 @@
-<%# ============================================================
-    Banner — call to action
-    ============================================================ %>
-<div class="footer-banner">
-  <div class="footer-banner-inner">
-    <p class="footer-banner-title">Vous aussi vous souhaitez partager</p>
-    <p class="footer-banner-body">un coup de cœur ❤, un enthousiasme, une émotion&nbsp;🤩😯💔😢💗💃😍 artistique&nbsp;?</p>
-    <p class="footer-banner-body">La semaine prochaine, nous pourrions savourer ensemble votre œuvre d'art&nbsp;🌟</p>
-    <p class="footer-banner-body">Qu'en dites-vous&nbsp;?</p>
-    <p class="footer-banner-body">Partagez vos idées en nous écrivant à <a href="mailto:bonjour@entretouteslesfemmes.fr" class="footer-banner-link">bonjour@entretouteslesfemmes.fr</a></p>
-  </div>
-</div>
-
 <footer class="site-footer">
 
-  <%# ── Subscription section ── %>
-  <div class="footer-subscribe">
+  <%# ── Subscribe card ── %>
+  <div class="footer-subscribe-card-wrap">
     <div class="container">
-      <div class="footer-subscribe-inner">
-        <p class="footer-subscribe-title">Recevoir la lettre</p>
-        <p class="footer-subscribe-desc">Chaque dimanche, directement dans votre boîte mail.</p>
+
+      <%# Part 1 — Formulaire (blue border) %>
+      <div class="footer-subscribe-card">
+        <h2 class="footer-subscribe-card-title">
+          <i class="fa-regular fa-envelope"></i> Recevoir la lettre
+        </h2>
+        <p class="footer-subscribe-card-tagline">Chaque dimanche, directement dans votre boîte mail.</p>
         <form class="footer-subscribe-form" action="BREVO_FORM_URL" method="post" accept-charset="utf-8" target="_blank">
           <input type="email" name="EMAIL" placeholder="Votre adresse e-mail" required>
           <button type="submit">S'abonner</button>
         </form>
       </div>
+
+      <%# Part 2 — Vous aussi %>
+      <div class="footer-subscribe-card-banner">
+        <p class="footer-subscribe-card-banner-title">Vous aussi vous souhaitez partager</p>
+        <p class="footer-subscribe-card-banner-body">un coup de cœur ❤, un enthousiasme, une émotion&nbsp;🤩😯💔😢💗💃😍 artistique&nbsp;?</p>
+        <p class="footer-subscribe-card-banner-body">La semaine prochaine, nous pourrions savourer ensemble votre œuvre d'art&nbsp;🌟</p>
+        <p class="footer-subscribe-card-banner-body">Partagez vos idées en nous écrivant à <a href="mailto:bonjour@entretouteslesfemmes.fr" class="footer-subscribe-card-link">bonjour@entretouteslesfemmes.fr</a></p>
+      </div>
+
     </div>
   </div>
 
@@ -35,20 +35,30 @@
         <div class="col-12 col-md-5">
           <p class="footer-brand-title">Entre toutes <em>les femmes</em></p>
           <p class="footer-brand-tagline">Nourrir, encourager, éclairer</p>
-          <a href="mailto:bonjour@entretouteslesfemmes.fr" class="footer-brand-email">bonjour@entretouteslesfemmes.fr</a>
         </div>
 
         <div class="col-12 col-md-7">
-          <div class="row g-2">
+          <div class="row g-2 justify-content-end">
             <% @nav_themes&.each do |theme| %>
               <div class="col-6">
                 <%= link_to theme.name, theme_path(theme), class: "footer-theme-link" %>
               </div>
             <% end %>
+            <div class="col-6">
+              <%= link_to "Toutes les lettres", newsletters_path, class: "footer-theme-link" %>
+            </div>
           </div>
         </div>
 
       </div>
+
+      <div class="footer-email-row">
+        <a href="mailto:bonjour@entretouteslesfemmes.fr" class="footer-email-link">
+          <i class="fa-regular fa-envelope"></i>
+          bonjour@entretouteslesfemmes.fr
+        </a>
+      </div>
+
     </div>
   </div>
 
