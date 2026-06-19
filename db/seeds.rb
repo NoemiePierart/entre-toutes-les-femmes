@@ -134,4 +134,19 @@ post4.content = <<~HTML
 HTML
 post4.save!
 
+# Theme images
+{
+  qui_suis_je     => "db/seeds/theme_images/qui_suis_je.jpg",
+  coin_des_mamans => "db/seeds/theme_images/coin_des_mamans.png",
+  oeuvre_art      => "db/seeds/theme_images/oeuvre_art.jpg"
+}.each do |theme, path|
+  unless theme.image.attached?
+    theme.image.attach(
+      io:           File.open(Rails.root.join(path)),
+      filename:     File.basename(path),
+      content_type: path.end_with?(".png") ? "image/png" : "image/jpeg"
+    )
+  end
+end
+
 puts "Seed terminé : #{Newsletter.count} lettres, #{Theme.count} thèmes, #{Post.count} articles, #{User.count} utilisateurs."
