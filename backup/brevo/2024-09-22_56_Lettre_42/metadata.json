@@ -1,0 +1,247 @@
+{
+  "id": 56,
+  "name": "Lettre 42",
+  "subject": "Lettre 42",
+  "previewText": "À la limite",
+  "type": "classic",
+  "status": "sent",
+  "scheduledAt": "2024-09-22T17:30:00.000+02:00",
+  "testSent": false,
+  "header": "[DEFAULT_HEADER]",
+  "footer": "EXISTS",
+  "sender": {
+    "email": "bonjour@entretouteslesfemmes.fr",
+    "name": "Entre toutes les femmes",
+    "id": 3
+  },
+  "replyTo": "bonjour@entretouteslesfemmes.fr",
+  "toField": "",
+  "shareLink": "http://sh1.sendinblue.com/nnzfnz7ugc.html",
+  "emailExpirationDate": [],
+  "tag": "",
+  "createdAt": "2024-09-16T13:35:55.000+02:00",
+  "modifiedAt": "2024-09-22T12:34:02.000+02:00",
+  "sentDate": "2024-09-22T17:31:11.000+02:00",
+  "inlineImageActivation": false,
+  "mirrorActive": true,
+  "recipients": {
+    "lists": [
+      2
+    ],
+    "exclusionLists": [],
+    "segments": [],
+    "excludedSegments": []
+  },
+  "statistics": {
+    "globalStats": {
+      "uniqueClicks": 0,
+      "clickers": 0,
+      "complaints": 0,
+      "delivered": 0,
+      "sent": 0,
+      "softBounces": 0,
+      "hardBounces": 0,
+      "uniqueViews": 0,
+      "unsubscriptions": 0,
+      "viewed": 0,
+      "trackableViews": 0,
+      "trackableViewsRate": 0,
+      "estimatedViews": 0,
+      "opensRate": 0,
+      "appleMppOpens": 0
+    },
+    "campaignStats": [
+      {
+        "listId": 2,
+        "uniqueClicks": 30,
+        "clickers": 39,
+        "complaints": 0,
+        "delivered": 156,
+        "sent": 156,
+        "softBounces": 0,
+        "hardBounces": 0,
+        "uniqueViews": 143,
+        "trackableViews": 96,
+        "unsubscriptions": 0,
+        "viewed": 219,
+        "deferred": 0
+      }
+    ],
+    "mirrorClick": 0,
+    "remaining": 0,
+    "linksStats": {
+      "https://fr.wikipedia.org/wiki/Le_Pont-Neuf#/media/Fichier:Pont-Neuf_(1872)_-_Pierre-Auguste_Renoir_(National_Gallery_of_Art,_Washington_D.C.).jpg": 0,
+      "https://tinyurl.com/3theu4x6": 0,
+      "https://www.admagazine.fr/article/couleur-generation-z-deteste-par-dessus-tout": 0,
+      "https://www.brevo.com?utm_source=logo_client&utm_medium=email": 0,
+      "https://www.facebook.com/nationalgalleryofart/videos/this-breathtaking-view-of-paris-was-painted-by-auguste-renoir-in-1872-and-it-rep/1303923973914018/": 0
+    },
+    "statsByDomain": {},
+    "statsByDevice": {
+      "desktop": {
+        "mac": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        },
+        "othersystem": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        },
+        "windows": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        }
+      },
+      "mobile": {
+        "androidmobile": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        },
+        "iphone": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        }
+      },
+      "tablet": {
+        "androidtablet": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        },
+        "appleipad": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        }
+      }
+    },
+    "statsByBrowser": {
+      "android": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "chrome": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "edge": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "electron": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "firefox": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "internetexplorer": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "mailchannelsscanner": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "microsoft": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "mozilla": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "opera": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "outlookexpress": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "safari": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "thunderbird": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "unknown": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "yahoomailproxy": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      }
+    }
+  },
+  "abTesting": false,
+  "sendAtBestTime": false
+}

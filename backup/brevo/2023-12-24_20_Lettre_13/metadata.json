@@ -1,0 +1,244 @@
+{
+  "id": 20,
+  "name": "Lettre 13",
+  "subject": "Lettre 13",
+  "previewText": "Joyeux Noël !",
+  "type": "classic",
+  "status": "sent",
+  "scheduledAt": "2023-12-24T17:30:00.000+01:00",
+  "testSent": false,
+  "header": "[DEFAULT_HEADER]",
+  "footer": "EXISTS",
+  "sender": {
+    "email": "",
+    "name": "Entre toutes les femmes",
+    "id": 2
+  },
+  "replyTo": "entretouteslesfemmes@outlook.fr",
+  "toField": "",
+  "shareLink": "http://sh1.sendinblue.com/ncx7nz7ugc.html",
+  "tag": "",
+  "createdAt": "2023-12-19T13:08:18.000+01:00",
+  "modifiedAt": "2023-12-24T17:26:37.000+01:00",
+  "sentDate": "2023-12-24T17:31:13.000+01:00",
+  "inlineImageActivation": false,
+  "mirrorActive": true,
+  "recipients": {
+    "lists": [
+      2
+    ],
+    "exclusionLists": [],
+    "segments": [],
+    "excludedSegments": []
+  },
+  "statistics": {
+    "globalStats": {
+      "uniqueClicks": 0,
+      "clickers": 0,
+      "complaints": 0,
+      "delivered": 0,
+      "sent": 0,
+      "softBounces": 0,
+      "hardBounces": 0,
+      "uniqueViews": 0,
+      "unsubscriptions": 0,
+      "viewed": 0,
+      "trackableViews": 0,
+      "trackableViewsRate": 0,
+      "estimatedViews": 0,
+      "opensRate": 0,
+      "appleMppOpens": 0
+    },
+    "campaignStats": [
+      {
+        "listId": 2,
+        "uniqueClicks": 7,
+        "clickers": 13,
+        "complaints": 0,
+        "delivered": 80,
+        "sent": 80,
+        "softBounces": 0,
+        "hardBounces": 0,
+        "uniqueViews": 71,
+        "trackableViews": 46,
+        "unsubscriptions": 0,
+        "viewed": 139,
+        "deferred": 0
+      }
+    ],
+    "mirrorClick": 0,
+    "remaining": 0,
+    "linksStats": {
+      "https://tinyurl.com/3theu4x6": 0,
+      "https://www.brevo.com?utm_source=logo_client&utm_medium=email": 0,
+      "https://www.youtube.com/watch?v=kRibWSyJ4X4": 0
+    },
+    "statsByDomain": {},
+    "statsByDevice": {
+      "desktop": {
+        "mac": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        },
+        "othersystem": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        },
+        "windows": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        }
+      },
+      "mobile": {
+        "androidmobile": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        },
+        "iphone": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        }
+      },
+      "tablet": {
+        "androidtablet": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        },
+        "appleipad": {
+          "clickers": 0,
+          "uniqueClicks": 0,
+          "viewed": 0,
+          "uniqueViews": 0,
+          "trackableViews": 0
+        }
+      }
+    },
+    "statsByBrowser": {
+      "android": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "chrome": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "edge": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "electron": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "firefox": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "internetexplorer": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "mailchannelsscanner": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "microsoft": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "mozilla": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "opera": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "outlookexpress": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "safari": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "thunderbird": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "unknown": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      },
+      "yahoomailproxy": {
+        "clickers": 0,
+        "uniqueClicks": 0,
+        "viewed": 0,
+        "uniqueViews": 0,
+        "trackableViews": 0
+      }
+    }
+  },
+  "abTesting": false,
+  "sendAtBestTime": false
+}
