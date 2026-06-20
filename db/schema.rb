@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_19_151702) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_20_204439) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -72,6 +72,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_19_151702) do
     t.index ["newsletter_id"], name: "index_posts_on_newsletter_id"
     t.index ["theme_id"], name: "index_posts_on_theme_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "processed_brevo_events", force: :cascade do |t|
+    t.integer "campaign_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["campaign_id"], name: "index_processed_brevo_events_on_campaign_id", unique: true
   end
 
   create_table "themes", force: :cascade do |t|

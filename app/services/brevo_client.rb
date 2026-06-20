@@ -34,6 +34,14 @@ class BrevoClient
     get("/contacts/lists?limit=50")["lists"] || []
   end
 
+  def register_webhook(url, events: [ "delivered" ], type: "marketing")
+    post("/webhooks", { url: url, events: events, type: type })
+  end
+
+  def webhooks
+    get("/webhooks")["webhooks"] || []
+  end
+
   private
 
   def post(path, body)

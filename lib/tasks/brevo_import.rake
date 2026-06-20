@@ -15,6 +15,22 @@ namespace :brevo do
     BrevoClient.new.lists.each { |l| puts "#{l['id'].to_s.ljust(6)} #{l['name']}" }
   end
 
+  desc "Register Brevo webhook for 'delivered' events (requires APP_URL and BREVO_WEBHOOK_SECRET)"
+  task register_webhook: :environment do
+    app_url = ENV.fetch("APP_URL")
+    secret  = ENV.fetch("BREVO_WEBHOOK_SECRET")
+    url     = "#{app_url}/webhooks/brevo?token=#{secret}"
+    result  = BrevoClient.new.register_webhook(url)
+    puts "Webhook enregistré (ID #{result['id']}) : #{url}"
+  end
+
+  desc "List registered Brevo webhooks"
+  task list_webhooks: :environment do
+    BrevoClient.new.webhooks.each do |w|
+      puts "##{w['id']} [#{w['events'].join(', ')}] #{w['url']}"
+    end
+  end
+
   desc "Fetch one newsletter HTML to tmp/brevo_sample.html for inspection"
   task fetch_sample: :environment do
     client   = BrevoClient.new

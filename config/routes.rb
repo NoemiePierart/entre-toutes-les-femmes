@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :posts
   get "images", to: "pages#images", as: :images_index
   post "subscribe", to: "subscriptions#create", as: :subscribe
+  post "webhooks/brevo", to: "webhooks#brevo", as: :brevo_webhook
   get "sitemap.xml", to: "sitemaps#index", defaults: { format: :xml }, as: :sitemap
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
