@@ -1,24 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <title><%= content_for(:title) || "Entre Toutes Les Femmes" %></title>
+    <% _page_title = yield(:title) %>
+    <title><%= _page_title.present? ? "#{_page_title} — Entre toutes les femmes" : "Entre toutes les femmes" %></title>
+    <% _page_description = yield(:description).presence || "Entre toutes les femmes — une lettre hebdomadaire pour nourrir, encourager et éclairer les femmes chrétiennes." %>
+    <meta name="description" content="<%= _page_description %>">
+
+    <%# Open Graph %>
+    <meta property="og:site_name" content="Entre toutes les femmes">
+    <meta property="og:type" content="<%= yield(:og_type).presence || "website" %>">
+    <meta property="og:url" content="<%= request.original_url %>">
+    <meta property="og:title" content="<%= _page_title.presence || "Entre toutes les femmes" %>">
+    <meta property="og:description" content="<%= _page_description %>">
+    <% if (_og_image = yield(:og_image)).present? %>
+      <meta property="og:image" content="<%= _og_image %>">
+      <meta name="twitter:image" content="<%= _og_image %>">
+    <% end %>
+
+    <%# Twitter Card %>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= _page_title.presence || "Entre toutes les femmes" %>">
+    <meta name="twitter:description" content="<%= _page_description %>">
+
+    <%# Canonical URL %>
+    <link rel="canonical" href="<%= request.base_url + request.path %>">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Entre Toutes Les Femmes">
+    <meta name="application-name" content="Entre toutes les femmes">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+    <%= yield :json_ld %>
 
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>

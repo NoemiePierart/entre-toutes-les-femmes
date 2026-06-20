@@ -1,6 +1,26 @@
 <% content_for :title, @post.title %>
+<% content_for :og_type, "article" %>
+<% content_for :description, @post.content.to_plain_text.truncate(155) %>
+<% if @post.cover_image? %>
+  <% content_for :og_image, absolute_asset_url(@post.cover_image) %>
+<% end %>
+<% content_for :json_ld do %>
+  <script type="application/ld+json">
+    <%== ({ "@context" => "https://schema.org", "@type" => "BlogPosting", "headline" => @post.title, "datePublished" => @post.newsletter.published_on.iso8601, "url" => post_url(@post), "author" => { "@type" => "Organization", "name" => "Entre toutes les femmes" }, "publisher" => { "@type" => "Organization", "name" => "Entre toutes les femmes" } }.tap { |h| h["image"] = absolute_asset_url(@post.cover_image) if @post.cover_image? }).to_json %>
+  </script>
+  <script type="application/ld+json">
+    <%== { "@context" => "https://schema.org", "@type" => "BreadcrumbList", "itemListElement" => [ { "@type" => "ListItem", "position" => 1, "name" => "Accueil", "item" => root_url }, { "@type" => "ListItem", "position" => 2, "name" => @post.theme.name, "item" => theme_url(@post.theme) }, { "@type" => "ListItem", "position" => 3, "name" => @post.title } ] }.to_json %>
+  </script>
+<% end %>
 
 <div class="container py-5">
+  <nav aria-label="fil d'Ariane" class="post-show-breadcrumb mb-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "Accueil", root_path %></li>
+      <li class="breadcrumb-item"><%= link_to @post.theme.name, theme_path(@post.theme) %></li>
+      <li class="breadcrumb-item active" aria-current="page"><%= @post.title %></li>
+    </ol>
+  </nav>
   <div class="post-show">
     <div class="mb-3">
       <span class="newsletter-show-post-theme"><%= @post.theme.name %></span>
@@ -20,7 +40,7 @@
 
     <hr class="mt-5" style="border-color: #0D223F;">
     <div class="d-flex justify-content-between align-items-center pt-2">
-      <%= link_to "← Retour au blog", posts_path, class: "btn btn-outline-primary btn-sm" %>
+      <%= link_to "Voir toute la lettre #{@post.newsletter.number}", newsletter_path(@post.newsletter), class: "btn btn-outline-primary btn-sm" %>
       <% if current_user&.admin? %>
         <div>
           <%= link_to "Modifier", edit_post_path(@post), class: "btn btn-outline-secondary btn-sm" %>

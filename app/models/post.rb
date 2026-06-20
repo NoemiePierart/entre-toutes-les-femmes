@@ -10,6 +10,10 @@ class Post < ApplicationRecord
 
   validates :title, presence: true
 
+  def to_param
+    "#{id}-#{title.parameterize}"
+  end
+
   def cover_image
     thumbnail.attached? ? thumbnail : theme.image
   end

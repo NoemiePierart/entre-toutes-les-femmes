@@ -1,6 +1,11 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  def absolute_asset_url(attachment)
+    url = url_for(attachment)
+    url.start_with?("http") ? url : request.base_url + url
+  end
+
   def with_image_sources(content)
     return content if content.blank?
 

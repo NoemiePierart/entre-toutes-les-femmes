@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   get "admin", to: redirect("/users/sign_in"), as: :admin_login
-  resources :newsletters, only: [ :index, :show ]
+  resources :newsletters, only: [ :index, :show ], path: "lettres"
   resources :themes, only: [ :show ]
   resources :posts
   get "images", to: "pages#images", as: :images_index
+  get "sitemap.xml", to: "sitemaps#index", defaults: { format: :xml }, as: :sitemap
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -1,4 +1,8 @@
 <% content_for :title, @theme.name %>
+<% content_for :description, @theme.description.presence || "Découvrez les articles de la rubrique #{@theme.name} — Entre toutes les femmes." %>
+<% if @theme.image.attached? %>
+  <% content_for :og_image, absolute_asset_url(@theme.image) %>
+<% end %>
 
 <div class="theme-show-page">
 

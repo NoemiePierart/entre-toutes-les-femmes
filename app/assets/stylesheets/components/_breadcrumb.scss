@@ -1,0 +1,31 @@
+.breadcrumb {
+  font-family: "Courier New", courier, monospace;
+  font-size: 0.82rem;
+  margin-bottom: 0;
+
+  .breadcrumb-item a {
+    color: $navy;
+    text-decoration: none;
+
+    &:hover { color: $burgundy; }
+  }
+
+  .breadcrumb-item.active {
+    color: mix($near-black, white, 55%);
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    color: mix($near-black, white, 30%);
+  }
+}
+
+.newsletter-show-breadcrumb {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 1rem 0 0;
+}
+
+.post-show-breadcrumb {
+  max-width: 720px;
+  margin: 0 auto;
+}

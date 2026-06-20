@@ -3,4 +3,8 @@ class Theme < ApplicationRecord
   has_one_attached :image
 
   validates :name, presence: true
+
+  def to_param
+    name.parameterize
+  end
 end

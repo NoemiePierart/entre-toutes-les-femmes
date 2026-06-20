@@ -1,4 +1,28 @@
 <% content_for :title, "Lettre #{@newsletter.number}" %>
+<% content_for :og_type, "article" %>
+<% content_for :description, "Lettre #{@newsletter.number} du #{l(@newsletter.published_on, format: :long)}#{@newsletter.liturgical_context.present? ? " — #{@newsletter.liturgical_context}" : ""} : #{@newsletter.posts.map(&:title).join(", ").truncate(120)}" %>
+<% if @newsletter.cover_image.attached? %>
+  <% content_for :og_image, absolute_asset_url(@newsletter.cover_image) %>
+<% end %>
+<% content_for :json_ld do %>
+  <script type="application/ld+json">
+    <%== { "@context" => "https://schema.org", "@type" => "WebPage", "name" => "Lettre #{@newsletter.number} — Entre toutes les femmes", "datePublished" => @newsletter.published_on.iso8601, "url" => newsletter_url(@newsletter) }.to_json %>
+  </script>
+  <script type="application/ld+json">
+    <%== { "@context" => "https://schema.org", "@type" => "BreadcrumbList", "itemListElement" => [ { "@type" => "ListItem", "position" => 1, "name" => "Accueil", "item" => root_url }, { "@type" => "ListItem", "position" => 2, "name" => "Les lettres", "item" => newsletters_url }, { "@type" => "ListItem", "position" => 3, "name" => "Lettre #{@newsletter.number}" } ] }.to_json %>
+  </script>
+<% end %>
+
+<%# Breadcrumb %>
+<div class="container">
+  <nav aria-label="fil d'Ariane" class="newsletter-show-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "Accueil", root_path %></li>
+      <li class="breadcrumb-item"><%= link_to "Les lettres", newsletters_path %></li>
+      <li class="breadcrumb-item active" aria-current="page">Lettre <%= @newsletter.number %></li>
+    </ol>
+  </nav>
+</div>
 
 <%# Hero %>
 <section class="newsletter-show-hero">

@@ -59,6 +59,19 @@
   margin: 0;
 }
 
+.home-section-quote {
+  font-family: $body-font;
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  font-style: italic;
+  color: mix($navy, white, 65%);
+  max-width: 680px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  line-height: 1.7;
+
+  i { color: $navy; margin-right: 0.3rem; }
+}
+
 // SECTION 2 — Rubriques
 .home-rubriques {
   background: white;
