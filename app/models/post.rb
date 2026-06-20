@@ -9,4 +9,12 @@ class Post < ApplicationRecord
   has_one_attached :thumbnail
 
   validates :title, presence: true
+
+  def cover_image
+    thumbnail.attached? ? thumbnail : theme.image
+  end
+
+  def cover_image?
+    thumbnail.attached? || theme.image.attached?
+  end
 end

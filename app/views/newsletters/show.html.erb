@@ -14,6 +14,9 @@
         <% end %>
       </div>
     </div>
+    <% if @newsletter.cover_caption.present? %>
+      <p class="image-source"><%= @newsletter.cover_caption %></p>
+    <% end %>
   </div>
 </section>
 
@@ -26,7 +29,7 @@
           <span class="newsletter-show-post-theme"><%= post.theme.name %></span>
           <h2 class="newsletter-show-post-title"><%= post.title %></h2>
           <div class="post-content">
-            <%= post.content %>
+            <%= with_image_sources(post.content) %>
           </div>
           <% if current_user&.admin? %>
             <div class="newsletter-show-post-actions">

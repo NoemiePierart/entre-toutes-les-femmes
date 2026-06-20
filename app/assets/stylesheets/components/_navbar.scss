@@ -34,8 +34,18 @@
   color: $near-black;
   font-size: 1rem;
 
+  span {
+    padding-bottom: 3px;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom-color 0.15s ease;
+  }
+
   &:hover {
-    color: $burgundy;
+    color: $near-black;
+
+    span {
+      border-bottom-color: $near-black;
+    }
   }
 }
 

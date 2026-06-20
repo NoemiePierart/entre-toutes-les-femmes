@@ -27,8 +27,8 @@
         <% @posts.each do |post| %>
           <%= link_to post, class: "theme-card text-decoration-none" do %>
             <div class="theme-card-image">
-              <% if post.thumbnail.attached? %>
-                <div class="theme-card-image-bg" style="background-image: url('<%= url_for(post.thumbnail.variant(resize_to_limit: [800, 500])) %>')"></div>
+              <% if post.cover_image? %>
+                <%= image_tag post.cover_image.variant(resize_to_limit: [800, 500]), class: "theme-card-image-bg", alt: post.title, loading: "lazy" %>
               <% end %>
             </div>
             <div class="theme-card-desc">

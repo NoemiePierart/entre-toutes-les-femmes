@@ -8,7 +8,7 @@
     <% @posts.each do |post| %>
       <div class="col-6 col-md-4 col-lg-3">
         <a href="<%= url_for(post) %>" target="_blank" class="d-block text-decoration-none">
-          <%= image_tag post.thumbnail, class: "img-fluid w-100", style: "height: 160px; object-fit: cover; object-position: center top;" %>
+          <%= image_tag post.thumbnail, class: "img-fluid w-100", style: "height: 160px; object-fit: cover; object-position: center top;", alt: post.title, loading: "lazy" %>
         </a>
         <div class="mt-1" style="font-size: 0.75rem; color: #666;">
           <span style="font-family: 'Courier New', monospace;">Lettre <%= post.newsletter.number %></span>

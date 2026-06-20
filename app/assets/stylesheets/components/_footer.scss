@@ -9,8 +9,9 @@
   border: 1.5px solid $steel-blue;
   border-radius: 10px;
   padding: 2.5rem 3rem;
-  margin-bottom: 2.5rem;
   text-align: center;
+  max-width: 768px;
+  margin: 0 auto 2.5rem;
 }
 
 .footer-subscribe-card-title {
@@ -118,7 +119,12 @@
   font-size: 0.82rem;
   color: mix($cream, $navy, 55%);
   text-decoration: none;
-  &:hover { color: $cream; }
+  border-bottom: 3px solid transparent;
+  transition: border-bottom-color 0.15s ease;
+
+  &:hover {
+    border-bottom-color: mix($cream, $navy, 55%);
+  }
 }
 
 
@@ -137,7 +143,20 @@
   color: $cream;
   text-decoration: none;
   padding: 0.25rem 0;
-  &:hover { color: mix($cream, $burgundy, 55%); }
+
+  span {
+    padding-bottom: 3px;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom-color 0.15s ease;
+  }
+
+  &:hover {
+    color: $cream;
+
+    span {
+      border-bottom-color: $cream;
+    }
+  }
 }
 
 
@@ -172,19 +191,7 @@
     &:focus { border-color: $steel-blue; }
   }
 
-  button {
-    font-family: $body-font;
-    font-size: 0.9rem;
-    background: $navy;
-    border: 1px solid $navy;
-    color: $cream;
-    padding: 0.5rem 1.25rem;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: background 0.15s ease;
 
-    &:hover { background: $steel-blue; border-color: $steel-blue; }
-  }
 }
 
 // ─── Footer email row ─────────────────────────────────────────
@@ -202,6 +209,8 @@
   color: $cream;
   text-decoration: none;
   letter-spacing: 0.03em;
+  border-bottom: 3px solid transparent;
+  transition: border-bottom-color 0.15s ease;
 
   i {
     margin-right: 0.5rem;
@@ -209,7 +218,9 @@
     font-size: 1.1em;
   }
 
-  &:hover { color: $steel-blue; }
+  &:hover {
+    border-bottom-color: $cream;
+  }
 }
 
 // ─── Bottom bar ───────────────────────────────────────────────

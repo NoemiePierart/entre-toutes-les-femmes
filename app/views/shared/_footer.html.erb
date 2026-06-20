@@ -12,7 +12,7 @@
         <p class="footer-subscribe-card-tagline">Chaque dimanche, directement dans votre boîte mail.</p>
         <form class="footer-subscribe-form" action="BREVO_FORM_URL" method="post" accept-charset="utf-8" target="_blank">
           <input type="email" name="EMAIL" placeholder="Votre adresse e-mail" required>
-          <button type="submit">S'abonner</button>
+          <button type="submit" class="btn btn-primary">S'abonner</button>
         </form>
       </div>
 
@@ -41,11 +41,11 @@
           <div class="row g-2 justify-content-end">
             <% @nav_themes&.each do |theme| %>
               <div class="col-6">
-                <%= link_to theme.name, theme_path(theme), class: "footer-theme-link" %>
+                <%= link_to theme_path(theme), class: "footer-theme-link" do %><span><%= theme.name %></span><% end %>
               </div>
             <% end %>
             <div class="col-6">
-              <%= link_to "Toutes les lettres", newsletters_path, class: "footer-theme-link" %>
+              <%= link_to newsletters_path, class: "footer-theme-link" do %><span>Toutes les lettres</span><% end %>
             </div>
           </div>
         </div>

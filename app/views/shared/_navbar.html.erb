@@ -12,7 +12,7 @@
       <ul class="navbar-nav me-auto">
         <% @nav_themes&.each do |theme| %>
           <li class="nav-item">
-            <%= link_to theme.name, theme_path(theme), class: "nav-link" %>
+            <%= link_to theme_path(theme), class: "nav-link" do %><span><%= theme.name %></span><% end %>
           </li>
         <% end %>
       </ul>

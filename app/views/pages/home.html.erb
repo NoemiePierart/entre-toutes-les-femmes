@@ -22,7 +22,7 @@
         <%= link_to theme_path(theme), class: "theme-card text-decoration-none" do %>
           <div class="theme-card-image">
             <% if theme.image.attached? %>
-              <div class="theme-card-image-bg" style="background-image: url('<%= url_for(theme.image.variant(resize_to_limit: [800, 500])) %>')"></div>
+              <%= image_tag theme.image.variant(resize_to_limit: [800, 500]), class: "theme-card-image-bg", alt: theme.name, loading: "lazy" %>
             <% end %>
             <div class="theme-card-inner-border"></div>
             <h3 class="theme-card-title"><%= theme.name %></h3>
@@ -44,8 +44,10 @@
       <div class="home-newsletter-grid">
         <% @newsletters.each do |newsletter| %>
           <%= link_to newsletter_path(newsletter), class: "newsletter-card text-decoration-none" do %>
-            <div class="newsletter-card-image<%= ' newsletter-card-image--empty' unless newsletter.cover_image.attached? %>"
-                 <% if newsletter.cover_image.attached? %>style="background-image: url('<%= url_for(newsletter.cover_image.variant(resize_to_limit: [360, 240])) %>')"<% end %>>
+            <div class="newsletter-card-image<%= ' newsletter-card-image--empty' unless newsletter.cover_image.attached? %>">
+              <% if newsletter.cover_image.attached? %>
+                <%= image_tag newsletter.cover_image.variant(resize_to_limit: [360, 240]), class: "newsletter-card-cover-img", alt: "Couverture de la lettre #{newsletter.number}", loading: "lazy" %>
+              <% end %>
               <div class="newsletter-card-inner-border"></div>
               <div class="newsletter-card-image-overlay">
                 <div class="newsletter-card-number">Lettre <%= newsletter.number %></div>

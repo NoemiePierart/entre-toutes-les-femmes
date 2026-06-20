@@ -15,6 +15,15 @@
   justify-content: center;
   text-align: center;
   padding: 5rem 3rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    pointer-events: none;
+    z-index: 1;
+  }
 }
 
 .home-hero-overlay {
@@ -143,8 +152,10 @@
 .theme-card-image-bg {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   transition: transform 0.5s ease;
 }
 
@@ -228,6 +239,15 @@
   justify-content: center;
   text-align: center;
   padding: 4rem 3rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    pointer-events: none;
+    z-index: 1;
+  }
 }
 
 .theme-show-hero-overlay {

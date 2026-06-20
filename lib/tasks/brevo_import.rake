@@ -45,6 +45,14 @@ namespace :brevo do
     puts "\nDry-run terminé."
   end
 
+  desc "Full import pipeline: import + titles + thumbnails + cover images"
+  task full_import: :environment do
+    Rake::Task["brevo:import"].invoke
+    Rake::Task["posts:generate_titles"].invoke
+    Rake::Task["posts:backfill_thumbnails"].invoke
+    Rake::Task["newsletters:backfill_cover_images"].invoke
+  end
+
   desc "Import all newsletters from Brevo into the database"
   task import: :environment do
     admin    = User.find_by!(admin: true)
@@ -83,7 +91,8 @@ namespace :brevo do
       newsletter = Newsletter.create!(
         number:             number,
         published_on:       date,
-        liturgical_context: parser.liturgical_context
+        liturgical_context: parser.liturgical_context,
+        cover_caption:      parser.cover_caption
       )
 
       parser.sections.each do |section|
@@ -91,7 +100,8 @@ namespace :brevo do
           title:      "#{section[:theme_name]} — Lettre #{number}",
           theme:      Theme.find_by!(name: section[:theme_name]),
           newsletter: newsletter,
-          user:       admin
+          user:       admin,
+          archived:   section[:archived]
         )
         post.content = section[:html]
         post.save!

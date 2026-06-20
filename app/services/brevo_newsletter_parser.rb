@@ -8,17 +8,26 @@ class BrevoNewsletterParser
     "Une œuvre d'art à savourer"
   ].freeze
 
+  SKIP_PHRASES = [
+    "Vous aussi vous souhaitez partager"
+  ].freeze
+
+  ARCHIVED_THEMES = [
+    "Du grain à moudre"
+  ].freeze
+
   FRENCH_MONTHS = {
     "janvier" => 1, "février" => 2, "mars" => 3, "avril" => 4,
     "mai" => 5, "juin" => 6, "juillet" => 7, "août" => 8,
     "septembre" => 9, "octobre" => 10, "novembre" => 11, "décembre" => 12
   }.freeze
 
-  attr_reader :number, :date, :liturgical_context, :sections
+  attr_reader :number, :date, :liturgical_context, :sections, :cover_caption
 
   def initialize(html)
     @doc = Nokogiri::HTML(html)
     parse_header
+    parse_cover_caption
     parse_sections
   end
 
@@ -43,6 +52,19 @@ class BrevoNewsletterParser
     end
   end
 
+  def parse_cover_caption
+    img = @doc.at_css("img[src*='mailinblue'], img[src*='brevo']")
+    return unless img
+
+    caption_tr = img.ancestors("td").first&.ancestors("tr")&.first&.next_element
+    return unless caption_tr
+
+    caption_tr.css("br").each { |br| br.replace(Nokogiri::XML::Text.new(" — ", caption_tr.document)) }
+    parts = caption_tr.css("p").map { |p| p.text.gsub(/\s+/, " ").strip }.reject(&:empty?)
+    text  = parts.any? ? parts.join(" — ") : caption_tr.text.gsub(/\s+/, " ").strip
+    @cover_caption = text.presence
+  end
+
   def parse_sections
     h1s = @doc.css("h1.default-heading1")
     @sections = []
@@ -56,7 +78,7 @@ class BrevoNewsletterParser
       html  = nodes_to_html(nodes)
       next if html.strip.empty?
 
-      @sections << { theme_name: matched_theme, html: html }
+      @sections << { theme_name: matched_theme, html: html, archived: ARCHIVED_THEMES.include?(matched_theme) }
     end
   end
 
@@ -79,6 +101,8 @@ class BrevoNewsletterParser
   end
 
   def relevant_node?(node)
+    return false if SKIP_PHRASES.any? { |phrase| node.text.include?(phrase) }
+
     case node.name
     when "h2", "h3" then node.text.strip.present?
     when "p"         then node.text.strip.present? && node.ancestors("h1, h2, h3").none?

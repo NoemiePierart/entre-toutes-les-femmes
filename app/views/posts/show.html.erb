@@ -15,7 +15,7 @@
     </p>
 
     <div class="post-content">
-      <%= @post.content %>
+      <%= with_image_sources(@post.content) %>
     </div>
 
     <hr class="mt-5" style="border-color: #0D223F;">
