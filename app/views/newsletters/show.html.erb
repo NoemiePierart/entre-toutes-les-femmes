@@ -27,7 +27,7 @@
 <%# Hero %>
 <section class="newsletter-show-hero">
   <div class="container">
-    <div class="newsletter-show-hero-frame" <% if @newsletter.cover_image.attached? %>style="background-image: url('<%= url_for(@newsletter.cover_image.variant(resize_to_limit: [1400, 700])) %>')"<% end %>>
+    <div class="newsletter-show-hero-frame" <% if @newsletter.cover_image.attached? %>style="background-image: url('<%= url_for(@newsletter.cover_image.variant(resize_to_limit: [1400, 700], format: :webp)) %>')"<% end %>>
       <div class="newsletter-show-hero-overlay"></div>
       <div class="newsletter-show-hero-content">
         <i class="fa-regular fa-envelope newsletter-show-hero-icon"></i>

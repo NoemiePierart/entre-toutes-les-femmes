@@ -10,6 +10,11 @@ namespace :brevo do
     end
   end
 
+  desc "List Brevo contact lists (to find BREVO_LIST_ID)"
+  task lists: :environment do
+    BrevoClient.new.lists.each { |l| puts "#{l['id'].to_s.ljust(6)} #{l['name']}" }
+  end
+
   desc "Fetch one newsletter HTML to tmp/brevo_sample.html for inspection"
   task fetch_sample: :environment do
     client   = BrevoClient.new

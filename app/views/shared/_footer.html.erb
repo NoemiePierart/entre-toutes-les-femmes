@@ -10,10 +10,10 @@
           <i class="fa-regular fa-envelope"></i> Recevoir la lettre
         </h2>
         <p class="footer-subscribe-card-tagline">Chaque dimanche, directement dans votre boîte mail.</p>
-        <form class="footer-subscribe-form" action="BREVO_FORM_URL" method="post" accept-charset="utf-8" target="_blank">
-          <input type="email" name="EMAIL" placeholder="Votre adresse e-mail" required>
-          <button type="submit" class="btn btn-primary">S'abonner</button>
-        </form>
+        <%= form_with url: subscribe_path, class: "footer-subscribe-form" do |f| %>
+          <%= f.email_field :email, placeholder: "Votre adresse e-mail", required: true %>
+          <%= f.submit "S'abonner", class: "btn btn-primary" %>
+        <% end %>
       </div>
 
       <%# Part 2 — Vous aussi %>

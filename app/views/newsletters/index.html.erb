@@ -7,7 +7,7 @@
     <%= link_to newsletter_path(newsletter), class: "newsletter-card text-decoration-none" do %>
       <div class="newsletter-card-image<%= ' newsletter-card-image--empty' unless newsletter.cover_image.attached? %>">
         <% if newsletter.cover_image.attached? %>
-          <%= image_tag newsletter.cover_image.variant(resize_to_limit: [360, 240]), class: "newsletter-card-cover-img", alt: "Couverture de la lettre #{newsletter.number}", loading: "lazy" %>
+          <%= image_tag newsletter.cover_image.variant(resize_to_limit: [360, 240], format: :webp), class: "newsletter-card-cover-img", alt: "Couverture de la lettre #{newsletter.number}", loading: "lazy" %>
         <% end %>
         <div class="newsletter-card-inner-border"></div>
         <div class="newsletter-card-image-overlay">

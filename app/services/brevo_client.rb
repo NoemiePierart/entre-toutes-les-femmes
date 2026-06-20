@@ -25,7 +25,28 @@ class BrevoClient
     get("/emailCampaigns/#{id}")
   end
 
+  def subscribe(email)
+    list_id = ENV.fetch("BREVO_LIST_ID").to_i
+    post("/contacts", { email: email, listIds: [ list_id ], updateEnabled: true })
+  end
+
+  def lists
+    get("/contacts/lists?limit=50")["lists"] || []
+  end
+
   private
+
+  def post(path, body)
+    uri = URI("#{API_BASE}#{path}")
+    req = Net::HTTP::Post.new(uri)
+    req["api-key"]      = @api_key
+    req["accept"]       = "application/json"
+    req["content-type"] = "application/json"
+    req.body = body.to_json
+    res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(req) }
+    raise "Brevo API error #{res.code}: #{res.body}" unless res.is_a?(Net::HTTPSuccess)
+    res.body.empty? ? {} : JSON.parse(res.body)
+  end
 
   def get(path, retries: 4)
     uri = URI("#{API_BASE}#{path}")

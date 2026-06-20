@@ -8,7 +8,7 @@
 
   <%# Hero + Description %>
   <div class="theme-show-hero-wrap">
-    <div class="theme-show-hero-frame" <% if @theme.image.attached? %>style="background-image: url('<%= url_for(@theme.image.variant(resize_to_limit: [1400, 800])) %>')"<% end %>>
+    <div class="theme-show-hero-frame" <% if @theme.image.attached? %>style="background-image: url('<%= url_for(@theme.image.variant(resize_to_limit: [1400, 800], format: :webp)) %>')"<% end %>>
       <div class="theme-show-hero-overlay"></div>
       <div class="home-hero-content">
         <h1 class="home-hero-title"><%= @theme.name %></h1>
@@ -32,7 +32,7 @@
           <%= link_to post, class: "theme-card text-decoration-none" do %>
             <div class="theme-card-image">
               <% if post.cover_image? %>
-                <%= image_tag post.cover_image.variant(resize_to_limit: [800, 500]), class: "theme-card-image-bg", alt: post.title, loading: "lazy" %>
+                <%= image_tag post.cover_image.variant(resize_to_limit: [800, 500], format: :webp), class: "theme-card-image-bg", alt: post.title, loading: "lazy" %>
               <% end %>
             </div>
             <div class="theme-card-desc">
