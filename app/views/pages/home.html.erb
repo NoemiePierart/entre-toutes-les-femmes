@@ -1,7 +1,5 @@
 <% content_for :description, "Une lettre hebdomadaire pour nourrir, encourager et éclairer les femmes chrétiennes — articles, rubriques et partages artistiques." %>
-<% if @hero_newsletter&.cover_image&.attached? %>
-  <% content_for :og_image, absolute_asset_url(@hero_newsletter.cover_image) %>
-<% end %>
+<% content_for :og_image, request.base_url + "/og-image.png" %>
 <% content_for :json_ld do %>
   <script type="application/ld+json">
     <%== { "@context" => "https://schema.org", "@type" => "WebSite", "name" => "Entre toutes les femmes", "description" => "Une lettre hebdomadaire pour nourrir, encourager et éclairer les femmes chrétiennes.", "url" => root_url }.to_json %>
@@ -24,8 +22,7 @@
 <%# SECTION 2 — Rubriques %>
 <section class="home-rubriques">
   <div class="container">
-    <h2 class="home-section-title mb-2">Nos rubriques</h2>
-    <p class="home-section-quote"><i class="fa-solid fa-quote-left home-section-icon"></i> Encourager les femmes chrétiennes à vivre leur féminité de manière unifiée, en leur offrant un contenu riche de sens et beau</p>
+    <h2 class="home-section-title"><i class="fa-solid fa-quote-left home-section-icon"></i> Encourager les femmes chrétiennes à vivre leur féminité de manière unifiée, en leur offrant un contenu riche de sens et beau</h2>
     <div class="theme-cards">
       <% @themes.each do |theme| %>
         <%= link_to theme_path(theme), class: "theme-card text-decoration-none" do %>
