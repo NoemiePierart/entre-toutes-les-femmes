@@ -39,3 +39,9 @@
 # Ignore Mac and Linux file system files
 *.swp
 .DS_Store
+
+# Ignore downloaded images in Brevo backup (large binary files)
+/backup/brevo/*/images/
+/backup/brevo/*/cover.*
+/backup/brevo/*/cover_content_type
+/backup/brevo/*/images_map.json

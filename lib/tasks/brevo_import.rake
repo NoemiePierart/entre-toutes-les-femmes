@@ -74,6 +74,103 @@ namespace :brevo do
     Rake::Task["newsletters:backfill_cover_images"].invoke
   end
 
+  desc "Full offline import from local backup: import + titles + thumbnails + cover images"
+  task full_import_from_backup: :environment do
+    Rake::Task["brevo:import_from_backup"].invoke
+    Rake::Task["posts:generate_titles"].invoke
+  end
+
+  desc "Import all newsletters from local backup (no Brevo API calls)"
+  task import_from_backup: :environment do
+    require "pathname"
+
+    backup_dir = Rails.root.join("backup/brevo")
+    admin      = User.find_by!(admin: true)
+    imported   = 0
+    skipped    = 0
+
+    folders = Dir.glob(backup_dir.join("*/")).sort_by do |f|
+      basename = Pathname.new(f).basename.to_s
+      [ basename.scan(/Lettre[_ ](\d+)/i).flatten.first.to_i, basename ]
+    end
+
+    puts "#{folders.count} dossiers dans le backup...\n\n"
+
+    folders.each do |folder_path|
+      folder        = Pathname.new(folder_path)
+      metadata_file = folder.join("metadata.json")
+      html_file     = folder.join("content.html")
+
+      unless metadata_file.exist? && html_file.exist?
+        puts "[#{folder.basename}] ⚠ fichiers manquants, ignoré"
+        skipped += 1
+        next
+      end
+
+      metadata      = JSON.parse(File.read(metadata_file))
+      folder_name   = folder.basename.to_s
+      letter_number = folder_name.scan(/Lettre[_ ](\d+)/i).flatten.first.to_i
+      letter_number = metadata["name"].scan(/\d+/).first.to_i if letter_number.zero?
+
+      if SKIP_LETTERS.include?(letter_number) || metadata["name"] !~ /Lettre\s+\d+/i
+        puts "Ignoré : #{metadata['name']}"
+        skipped += 1
+        next
+      end
+
+      if Newsletter.exists?(number: letter_number)
+        puts "Déjà importée : Lettre #{letter_number}"
+        skipped += 1
+        next
+      end
+
+      puts "Importation : #{metadata['name']}…"
+      html   = File.read(html_file)
+      parser = BrevoNewsletterParser.new(html)
+
+      number     = parser.number || letter_number
+      date_str   = metadata["sentDate"] || metadata["scheduledAt"]
+      meta_date  = (Date.parse(date_str) rescue nil)
+      parsed     = parser.date
+      parsed     = nil if parsed && parsed.year < 2020
+      date       = meta_date || parsed
+
+      unless date
+        puts "  ⚠ Date introuvable pour Lettre #{number}, ignorée."
+        skipped += 1
+        next
+      end
+
+      newsletter = Newsletter.create!(
+        number:             number,
+        published_on:       date,
+        liturgical_context: parser.liturgical_context,
+        cover_caption:      parser.cover_caption
+      )
+
+      images_map = load_backup_images_map(folder)
+
+      parser.sections.each do |section|
+        post = Post.new(
+          title:      "#{section[:theme_name]} — Lettre #{number}",
+          theme:      Theme.find_by!(name: section[:theme_name]),
+          newsletter: newsletter,
+          user:       admin,
+          archived:   section[:archived]
+        )
+        post.content = section[:html]
+        post.save!
+        attach_backup_thumbnail(post, section[:html], folder, images_map)
+        puts "  ✓ #{section[:theme_name]}"
+      end
+
+      attach_backup_cover(newsletter, folder, images_map, html)
+      imported += 1
+    end
+
+    puts "\nTerminé : #{imported} lettres importées, #{skipped} ignorées."
+  end
+
   desc "Import all newsletters from Brevo into the database"
   task import: :environment do
     admin    = User.find_by!(admin: true)
@@ -135,4 +232,101 @@ namespace :brevo do
 
     puts "\nTerminé : #{imported} lettres importées, #{skipped} ignorées."
   end
+end
+
+def load_backup_images_map(folder)
+  map_file = folder.join("images_map.json")
+  return {} unless map_file.exist?
+  JSON.parse(File.read(map_file))
+rescue JSON::ParserError
+  {}
+end
+
+def attach_backup_cover(newsletter, folder, images_map, html)
+  return if newsletter.cover_image.attached?
+
+  # Try local cover file first
+  %w[jpg png gif webp].each do |ext|
+    cover_file = folder.join("cover.#{ext}")
+    next unless cover_file.exist?
+
+    content_type_file = folder.join("cover_content_type")
+    content_type = content_type_file.exist? ? File.read(content_type_file).strip : "image/jpeg"
+    newsletter.cover_image.attach(
+      io:           File.open(cover_file),
+      filename:     "cover.#{ext}",
+      content_type: content_type
+    )
+    return
+  end
+
+  # Fallback: find first Brevo-hosted image in HTML and download
+  doc = Nokogiri::HTML(html)
+  img = doc.css("img[src*='mailinblue'], img[src*='brevo'], img[src*='sendinblue']").first
+  img ||= doc.at_css("img[src]")
+  return unless img
+
+  src = img["src"].to_s
+
+  # Check images_map first
+  if (entry = images_map[src])
+    local_path = folder.join(entry["path"] || entry)
+    if local_path.exist?
+      newsletter.cover_image.attach(
+        io:           File.open(local_path),
+        filename:     File.basename(local_path.to_s),
+        content_type: entry.is_a?(Hash) ? entry["content_type"] : "image/jpeg"
+      )
+      return
+    end
+  end
+
+  # Last resort: download from URL
+  image_data = ImageDownloader.download(src)
+  return unless image_data
+
+  filename = File.basename(URI.parse(src).path).presence || "cover.jpg"
+  newsletter.cover_image.attach(
+    io:           StringIO.new(image_data[:body]),
+    filename:     filename,
+    content_type: image_data[:content_type] || "image/jpeg"
+  )
+rescue => e
+  Rails.logger.warn "import_from_backup cover [newsletter #{newsletter.id}]: #{e.message}"
+end
+
+def attach_backup_thumbnail(post, section_html, folder, images_map)
+  return if post.thumbnail.attached?
+
+  doc = Nokogiri::HTML.fragment(section_html.to_s)
+  img = doc.at_css("img[src]")
+  return unless img
+
+  src = img["src"].to_s
+
+  if (entry = images_map[src])
+    local_path = folder.join(entry.is_a?(Hash) ? entry["path"] : entry)
+    if local_path.exist?
+      content_type = entry.is_a?(Hash) ? entry["content_type"] : "image/jpeg"
+      post.thumbnail.attach(
+        io:           File.open(local_path),
+        filename:     File.basename(local_path.to_s),
+        content_type: content_type || "image/jpeg"
+      )
+      return
+    end
+  end
+
+  # Fallback: download from URL
+  image_data = ImageDownloader.download(src)
+  return unless image_data
+
+  filename = File.basename(URI.parse(src).path).presence || "thumbnail.jpg"
+  post.thumbnail.attach(
+    io:           StringIO.new(image_data[:body]),
+    filename:     filename,
+    content_type: image_data[:content_type] || "image/jpeg"
+  )
+rescue => e
+  Rails.logger.warn "import_from_backup thumbnail [post #{post.id}]: #{e.message}"
 end
