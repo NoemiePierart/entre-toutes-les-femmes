@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+PROD_HOST="ubuntu@51.75.71.151"
+PROD_DB="entre_toutes_les_femmes_production"
+LOCAL_DB="entre_toutes_les_femmes_development"
+DUMP_FILE="/tmp/prod_pull.dump"
+
+echo "==> Dump de la base de production..."
+ssh "$PROD_HOST" "sudo -u postgres pg_dump $PROD_DB -Fc -f $DUMP_FILE"
+
+echo "==> Téléchargement du dump..."
+scp "$PROD_HOST:$DUMP_FILE" "$DUMP_FILE"
+
+echo "==> Restauration en local..."
+dropdb --if-exists "$LOCAL_DB"
+createdb "$LOCAL_DB"
+pg_restore -d "$LOCAL_DB" --no-owner "$DUMP_FILE"
+
+echo "==> Synchronisation du storage..."
+rsync -az --rsync-path="sudo rsync" \
+  "$PROD_HOST:/var/lib/docker/volumes/entre_toutes_les_femmes_storage/_data/" \
+  "$(dirname "$0")/../storage/"
+
+echo "==> Nettoyage..."
+rm "$DUMP_FILE"
+ssh "$PROD_HOST" "rm -f $DUMP_FILE"
+
+echo ""
+echo "Fait. Base locale et storage synchronisés depuis la production."

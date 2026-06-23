@@ -41,6 +41,9 @@ env:
   secret:
     - RAILS_MASTER_KEY
     - DATABASE_URL
+    - CLOUDINARY_CLOUD_NAME
+    - CLOUDINARY_API_KEY
+    - CLOUDINARY_API_SECRET
   clear:
     APP_URL: https://entretouteslesfemmes.fr
 

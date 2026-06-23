@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Purge variant records after each deploy so Rails regenerates them cleanly.
+# Avoids stale VariantRecord entries pointing to missing files after a DB/storage sync.
+bin/kamal app exec "bin/rails runner 'ActiveStorage::VariantRecord.delete_all'"
+
+echo "$KAMAL_PERFORMER deployed $KAMAL_VERSION in $KAMAL_RUNTIME seconds"
