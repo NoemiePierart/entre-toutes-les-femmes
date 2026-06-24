@@ -10,7 +10,7 @@
     <meta property="og:site_name" content="Entre toutes les femmes">
     <meta property="og:type" content="<%= yield(:og_type).presence || "website" %>">
     <meta property="og:url" content="<%= request.original_url %>">
-    <meta property="og:title" content="<%= _page_title.presence || "Entre toutes les femmes" %>">
+    <meta property="og:title" content="<%= raw(_page_title.presence || "Entre toutes les femmes") %>">
     <meta property="og:description" content="<%= _page_description %>">
     <% if (_og_image = yield(:og_image)).present? %>
       <meta property="og:image" content="<%= _og_image %>">
@@ -19,7 +19,7 @@
 
     <%# Twitter Card %>
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<%= _page_title.presence || "Entre toutes les femmes" %>">
+    <meta name="twitter:title" content="<%= raw(_page_title.presence || "Entre toutes les femmes") %>">
     <meta name="twitter:description" content="<%= _page_description %>">
 
     <%# Canonical URL %>

@@ -1,7 +1,12 @@
 <% content_for :title, "Les lettres" %>
+<% content_for :og_image, request.base_url + "/og-image-newsletters.png" %>
 
 <div class="container py-5 blog-index">
   <h1 class="blog-index-title mb-4">Les lettres</h1>
+
+  <div class="d-flex justify-content-center mb-4">
+    <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
+  </div>
 
   <% @newsletters.each do |newsletter| %>
     <%= link_to newsletter_path(newsletter), class: "newsletter-card text-decoration-none" do %>
