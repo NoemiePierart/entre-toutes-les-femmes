@@ -1,5 +1,10 @@
-<% content_for :description, "Une lettre hebdomadaire pour nourrir, encourager et éclairer les femmes chrétiennes — articles, rubriques et partages artistiques." %>
+<% content_for :description, "Une lettre hebdomadaire pour nourrir, encourager et éclairer les femmes chrétiennes" %>
 <% content_for :og_image, request.base_url + "/og-image.png" %>
+<% if @hero_newsletter&.cover_image&.attached? %>
+  <% content_for :head do %>
+    <link rel="preload" as="image" href="<%= variant_url(@hero_newsletter.cover_image, resize_to_limit: [1400, 900], format: :webp) %>">
+  <% end %>
+<% end %>
 <% content_for :json_ld do %>
   <script type="application/ld+json">
     <%== { "@context" => "https://schema.org", "@type" => "WebSite", "name" => "Entre toutes les femmes", "description" => "Une lettre hebdomadaire pour nourrir, encourager et éclairer les femmes chrétiennes.", "url" => root_url }.to_json %>
@@ -9,7 +14,7 @@
 <%# SECTION 1 — Hero %>
 <section class="home-hero">
   <div class="container">
-    <div class="home-hero-frame" <% if @hero_newsletter&.cover_image&.attached? %>style="background-image: url('<%= url_for(@hero_newsletter.cover_image.variant(resize_to_limit: [1400, 900], format: :webp)) %>')"<% end %>>
+    <div class="home-hero-frame" <% if @hero_newsletter&.cover_image&.attached? %>style="background-image: url('<%= variant_url(@hero_newsletter.cover_image, resize_to_limit: [1400, 900], format: :webp) %>')"<% end %>>
       <div class="home-hero-overlay"></div>
       <div class="home-hero-content">
         <h1 class="home-hero-title">Entre toutes<br><em>les femmes</em></h1>
@@ -28,7 +33,7 @@
         <%= link_to theme_path(theme), class: "theme-card text-decoration-none" do %>
           <div class="theme-card-image">
             <% if theme.image.attached? %>
-              <%= image_tag theme.image.variant(resize_to_limit: [800, 500], format: :webp), class: "theme-card-image-bg", alt: theme.name, loading: "lazy" %>
+              <%= image_tag variant_url(theme.image, resize_to_limit: [800, 500], format: :webp), class: "theme-card-image-bg", alt: theme.name, loading: "lazy" %>
             <% end %>
             <div class="theme-card-inner-border"></div>
             <h3 class="theme-card-title"><%= theme.name %></h3>
@@ -52,7 +57,7 @@
           <%= link_to newsletter_path(newsletter), class: "newsletter-card text-decoration-none" do %>
             <div class="newsletter-card-image<%= ' newsletter-card-image--empty' unless newsletter.cover_image.attached? %>">
               <% if newsletter.cover_image.attached? %>
-                <%= image_tag newsletter.cover_image.variant(resize_to_limit: [360, 240], format: :webp), class: "newsletter-card-cover-img", alt: "Couverture de la lettre #{newsletter.number}", loading: "lazy" %>
+                <%= image_tag variant_url(newsletter.cover_image, resize_to_limit: [360, 240], format: :webp), class: "newsletter-card-cover-img", alt: "Couverture de la lettre #{newsletter.number}", loading: "lazy" %>
               <% end %>
               <div class="newsletter-card-inner-border"></div>
               <div class="newsletter-card-image-overlay">

@@ -6,6 +6,12 @@ module ApplicationHelper
     url.start_with?("http") ? url : request.base_url + url
   end
 
+  def variant_url(attachment, **transforms)
+    attachment.variant(**transforms).processed.image.url
+  rescue
+    url_for(attachment.variant(**transforms))
+  end
+
   def with_image_sources(content)
     return content if content.blank?
 
