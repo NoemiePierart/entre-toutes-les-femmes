@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light navbar-lewagon">
-  <div class="container-fluid">
+  <div class="container container-fluid">
     <%= link_to root_path, class: "navbar-brand" do %>
       Entre toutes <span>les femmes</span>
     <% end %>
@@ -15,6 +15,9 @@
             <%= link_to theme_path(theme), class: "nav-link" do %><span><%= theme.name %></span><% end %>
           </li>
         <% end %>
+        <li class="nav-item d-md-none navbar-letters-item">
+          <%= link_to "Toutes les lettres", newsletters_path, class: "navbar-letters-btn" %>
+        </li>
       </ul>
       <ul class="navbar-nav ms-auto">
         <% if user_signed_in? %>
