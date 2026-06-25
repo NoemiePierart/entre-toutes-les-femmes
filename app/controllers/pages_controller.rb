@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def home
     @newsletters = Newsletter.includes(posts: :theme, cover_image_attachment: :blob).order(published_on: :desc).limit(4)
     @themes = Theme.where(archived: false).with_attached_image.order(:id)
-    @hero_newsletter = Newsletter.find_by(number: 35)
+    @hero_newsletter = Newsletter.includes(cover_image_attachment: :blob).find_by(number: 35)
   end
 
   def images

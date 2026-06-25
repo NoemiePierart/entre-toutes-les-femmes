@@ -7,8 +7,14 @@ module ApplicationHelper
   end
 
   def variant_url(attachment, **transforms)
-    attachment.variant(**transforms).processed.image.url
-  rescue
+    blob = attachment.blob
+    crop_type = transforms[:resize_to_fill] ? :fill : :limit
+    dims = transforms[:resize_to_limit] || transforms[:resize_to_fill]
+    cl_options = { quality: :auto }
+    cl_options.merge!(width: dims[0], height: dims[1], crop: crop_type) if dims
+    cl_options[:format] = transforms[:format] if transforms[:format]
+    Cloudinary::Utils.cloudinary_url("entre-toutes-les-femmes/#{blob.key}", cl_options)
+  rescue StandardError
     url_for(attachment.variant(**transforms))
   end
 
