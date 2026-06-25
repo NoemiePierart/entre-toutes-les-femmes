@@ -308,13 +308,13 @@
   padding: 0 1rem;
 
   .theme-cards {
-    gap: 2.5rem;
+    gap: 1.5rem;
 
-    @media (min-width: 576px) and (max-width: 767px) {
+    @media (min-width: 576px) and (max-width: 992px) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
       grid-template-columns: repeat(3, 1fr);
     }
   }
