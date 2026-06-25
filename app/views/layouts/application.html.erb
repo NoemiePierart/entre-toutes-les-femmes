@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
     <% _page_title = yield(:title) %>
-    <title><%= _page_title.present? ? "#{_page_title} — Entre toutes les femmes" : "Entre toutes les femmes" %></title>
+    <title><%= _page_title.present? ? _page_title + " — Entre toutes les femmes" : "Entre toutes les femmes" %></title>
     <% _page_description = yield(:description).presence || "Entre toutes les femmes — une lettre hebdomadaire pour nourrir, encourager et éclairer les femmes chrétiennes." %>
     <meta name="description" content="<%= _page_description %>">
 
