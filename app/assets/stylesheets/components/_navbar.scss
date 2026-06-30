@@ -3,8 +3,7 @@
   top: 0;
   z-index: 1030;
   justify-content: space-between;
-  background-color: $cream;
-  border-bottom: 1px double #a6a3a3;
+  background-color: white;
   padding: 0.75rem 1.5rem;
 }
 
@@ -14,10 +13,10 @@
 
 .navbar-lewagon .navbar-brand {
   font-family: $headers-font;
-  font-size: 1.5rem;
-  color: $near-black;
+  font-size: 1.3rem;
   font-weight: 400;
-  line-height: 1.1;
+  padding: 0;
+  line-height: 1.5rem;
 
   span {
     display: block;
@@ -31,7 +30,6 @@
 
 .navbar-lewagon .nav-link {
   font-family: $body-font;
-  color: $near-black;
   font-size: 1rem;
 
   span {
@@ -69,12 +67,11 @@
   .navbar-lewagon:has(.navbar-collapse.show),
   .navbar-lewagon:has(.navbar-collapse.collapsing) {
     background: $navy;
-    border-bottom-color: rgba($cream, 0.2);
+    border-bottom-color: rgba(white, 0.2);
   }
 
   .navbar-lewagon:has(.navbar-collapse.show) .navbar-brand,
   .navbar-lewagon:has(.navbar-collapse.collapsing) .navbar-brand {
-    color: $cream;
     &:hover { color: white; }
   }
 
@@ -84,14 +81,14 @@
   }
 
   .navbar-lewagon .navbar-collapse.show {
-    border-top: 1px solid rgba($cream, 0.3);
+    border-top: 1px solid rgba(white, 0.3);
     margin-top: 0.75rem;
     padding-top: 0.25rem;
     padding-bottom: 0.75rem;
   }
 
   .navbar-lewagon .navbar-collapse.show .nav-item:not(.navbar-letters-item) {
-    border-bottom: 1px solid rgba($cream, 0.12);
+    border-bottom: 1px solid rgba(white, 0.12);
   }
 
   // Retire le border-bottom du dernier thème pour éviter le double trait avant le bouton
@@ -100,19 +97,19 @@
   }
 
   .navbar-lewagon .navbar-collapse.show .nav-link {
-    color: $cream;
+    color: white;
     padding: 0.85rem 0;
     span { border-bottom-color: transparent; }
     &:hover { color: white; }
   }
 
   .navbar-lewagon .navbar-collapse.show .nav-link-subtle {
-    color: rgba($cream, 0.6);
-    &:hover { color: $cream; }
+    color: rgba(white, 0.6);
+    &:hover { color: white; }
   }
 
   .navbar-lewagon .navbar-collapse.show .navbar-letters-item {
-    border-top: 1px solid rgba($cream, 0.18);
+    border-top: 1px solid rgba(white, 0.18);
     border-bottom: none;
     margin-top: 1.75rem;
     padding: 1.25rem 0 0.5rem;
@@ -120,7 +117,7 @@
 
   .navbar-lewagon .navbar-collapse.show .navbar-letters-btn {
     display: inline-block;
-    background: $cream;
+    background: white;
     color: $navy;
     padding: 0.6rem 1.75rem;
     font-family: $body-font;

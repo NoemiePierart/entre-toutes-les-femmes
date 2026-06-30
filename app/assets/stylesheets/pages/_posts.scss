@@ -15,12 +15,16 @@
   padding: 1.25rem;
   margin-bottom: 1rem;
   background: white;
-  color: $near-black;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.15s ease;
+  transition: box-shadow 0.15s ease, transform 0.25s ease;
 
   &:hover {
     box-shadow: 0 2px 12px rgba($navy, 0.1);
+    transform: translateY(-5px);
+
+    .newsletter-card-cover-img {
+      transform: scale(1.06);
+    }
   }
 
   @media (max-width: 576px) {
@@ -53,6 +57,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center top;
+  transition: transform 0.5s ease;
 }
 
 .newsletter-card-inner-border {
@@ -81,7 +86,6 @@
   font-size: 1.4rem;
   font-weight: 400;
   color: white;
-  line-height: 1.1;
   margin-bottom: 0.3rem;
 }
 
@@ -123,8 +127,6 @@
 .newsletter-card-post-title {
   font-family: $body-font;
   font-size: 1rem;
-  color: mix($near-black, white, 75%);
-  line-height: 1.3;
 }
 
 // Newsletter list (legacy, kept for reference)
@@ -202,7 +204,7 @@
     font-family: "Courier New", courier, monospace;
     font-size: 0.75rem;
     font-weight: normal;
-    background-color: $cream !important;
+    background-color: $light-blue !important;
     color: $navy !important;
     border: 1px solid $navy;
     letter-spacing: 0.05em;
@@ -223,11 +225,15 @@
 
   .card-footer {
     background: white;
-    border-top: 1px solid $cream;
+    border-top: 1px solid $burgundy;
   }
 }
 
 // Post show
+.post-show-page {
+  background: $light-blue;
+}
+
 .post-show {
   max-width: 720px;
   margin: 0 auto;
@@ -264,10 +270,6 @@
 
 // Shared rich-text body styles (post show + newsletter show)
 .post-content {
-  font-size: 1.125rem;
-  line-height: 1.8;
-  letter-spacing: 0.01em;
-  color: mix($gray-700, $navy, 75%);
 
   p {
     margin-bottom: 1.5rem;
@@ -314,7 +316,7 @@
 
 // Newsletter show
 .newsletter-show-hero {
-  background: $cream;
+  background: $light-blue;
   padding: 3rem 0;
 }
 
@@ -365,7 +367,6 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 400;
   color: white;
-  line-height: 1.1;
   margin-bottom: 0.75rem;
 }
 
@@ -386,7 +387,7 @@
 }
 
 .newsletter-show-body {
-  background: $cream;
+  background: $light-blue;
   padding-bottom: 5rem;
 }
 
@@ -421,7 +422,6 @@
   font-size: clamp(1.2rem, 2.5vw, 1.6rem);
   font-weight: 400;
   color: $navy;
-  line-height: 1.2;
   margin-bottom: 1.5rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid mix($navy, white, 15%);

@@ -1,9 +1,29 @@
-.btn-primary {
+.btn-light {
   font-family: $body-font;
   font-size: 0.9rem;
+  background: white;
+  border: 1px solid $navy;
+  color: $navy;
+  padding: 6px 6px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background: $navy;
+    color: white;
+  }
+}
+
+.btn-primary {
+  font-family: $body-font;
+  font-size: 1rem;
+  text-transform: uppercase;
   background: $navy;
   border: 1px solid $navy;
-  color: $cream;
+  color: white;
   padding: 0.5rem 1.25rem;
   white-space: nowrap;
   cursor: pointer;
@@ -14,6 +34,6 @@
   &:hover {
     background: $steel-blue;
     border-color: $steel-blue;
-    color: $cream;
+    color: white;
   }
 }

@@ -19,7 +19,10 @@
           <%= link_to "Toutes les lettres", newsletters_path, class: "navbar-letters-btn" %>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item d-none d-md-block">
+          <%= link_to "Toutes les lettres", newsletters_path, class: "btn-light" %>
+        </li>
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to "Se déconnecter", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link nav-link-subtle" %>

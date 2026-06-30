@@ -30,7 +30,7 @@
           <% newsletter.posts.sort_by { |p| p.theme.id }.each do |post| %>
             <div class="newsletter-card-post">
               <span class="newsletter-card-post-theme"><%= post.theme.name %></span>
-              <span class="newsletter-card-post-title"><%= post.title %></span>
+              <span class="newsletter-card-post-title"><%= post.display_title %></span>
             </div>
           <% end %>
         </div>

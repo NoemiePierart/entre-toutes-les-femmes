@@ -51,7 +51,7 @@
       <% @posts.each do |post| %>
         <article class="newsletter-show-post" id="post-<%= post.id %>">
           <span class="newsletter-show-post-theme"><%= post.theme.name %></span>
-          <h2 class="newsletter-show-post-title"><%= post.title %></h2>
+          <h2 class="newsletter-show-post-title"><%= post.display_title %></h2>
           <div class="post-content">
             <%= with_image_sources(post.content) %>
           </div>

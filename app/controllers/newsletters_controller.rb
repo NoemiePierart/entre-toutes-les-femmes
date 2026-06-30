@@ -3,7 +3,7 @@ class NewslettersController < ApplicationController
 
   def index
     @pagy, @newsletters = pagy(
-      Newsletter.includes(posts: :theme, cover_image_attachment: :blob).order(published_on: :desc),
+      Newsletter.includes(posts: [ :theme, :rich_text_content ], cover_image_attachment: :blob).order(published_on: :desc),
       limit: 15
     )
   end

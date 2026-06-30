@@ -1,7 +1,9 @@
 // Newsletter palette
-$cream:       #FFF3D6;  // warm background
+$cream:       #FFF3D6;  // warm background (kept for text/border uses)
+$light-blue:  #F0F8FA;  // page section backgrounds
 $navy:        #0D223F;  // headings, dividers, primary
-$near-black:  #212529;  // body text
+$near-black:  #212529;  // legacy
+$text:        #49475C;  // body text
 $burgundy:    #6C1332;  // quotes, accents
 $steel-blue:  #5E8AA2;  // highlighted text, links
 

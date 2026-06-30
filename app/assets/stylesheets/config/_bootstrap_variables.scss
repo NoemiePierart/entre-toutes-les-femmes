@@ -7,18 +7,20 @@
 // General style
 $font-family-sans-serif: $body-font;
 $headings-font-family:   $headers-font;
-$body-bg:                $cream;
-$font-size-base:         1.125rem;  // 18px
-$line-height-base:       1.4;
+$body-bg:                white;
+$font-size-base:         0.9375rem; // 15px
+$line-height-base:       1.6;
 
 // Colors
-$body-color:     $near-black;
+$body-color:     $text;
 $primary:        $navy;
 $secondary:      $steel-blue;
 $success:        $green;
 $danger:         $red;
-$link-color:     $steel-blue;
-$link-hover-color: $navy;
+$link-color:            $steel-blue;
+$link-hover-color:      $navy;
+$link-decoration:       none;
+$link-hover-decoration: none;
 
 // Headings
 $headings-color: $navy;

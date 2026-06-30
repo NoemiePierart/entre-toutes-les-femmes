@@ -1,8 +1,8 @@
 <% content_for :description, "Une lettre hebdomadaire pour nourrir, encourager et éclairer les femmes chrétiennes" %>
 <% content_for :og_image, request.base_url + "/og-image.png" %>
-<% if @hero_newsletter&.cover_image&.attached? %>
+<% if @hero_post&.thumbnail&.attached? %>
   <% content_for :head do %>
-    <link rel="preload" as="image" href="<%= variant_url(@hero_newsletter.cover_image, resize_to_limit: [1400, 900], format: :webp) %>">
+    <link rel="preload" as="image" href="<%= variant_url(@hero_post.thumbnail, resize_to_limit: [1400, 900], format: :webp) %>">
   <% end %>
 <% end %>
 <% content_for :json_ld do %>
@@ -14,13 +14,14 @@
 <%# SECTION 1 — Hero %>
 <section class="home-hero">
   <div class="container">
-    <div class="home-hero-frame" <% if @hero_newsletter&.cover_image&.attached? %>style="background-image: url('<%= variant_url(@hero_newsletter.cover_image, resize_to_limit: [1400, 900], format: :webp) %>')"<% end %>>
+    <div class="home-hero-frame" <% if @hero_post&.thumbnail&.attached? %>style="background-image: url('<%= variant_url(@hero_post.thumbnail, resize_to_limit: [1400, 900], format: :webp) %>')"<% end %>>
       <div class="home-hero-overlay"></div>
       <div class="home-hero-content">
         <h1 class="home-hero-title">Entre toutes<br><em>les femmes</em></h1>
-        <p class="home-hero-tagline">Nourrir, encourager, éclairer</p>
+        <p class="home-hero-tagline">Nourrir &nbsp;·&nbsp; Encourager &nbsp;·&nbsp; Éclairer</p>
       </div>
     </div>
+    <p class="home-hero-caption">« Enfant lisant » — Pierre-Auguste Renoir</p>
   </div>
 </section>
 
@@ -75,7 +76,7 @@
                 <% newsletter.posts.sort_by { |p| p.theme.id }.each do |post| %>
                   <div class="newsletter-card-post">
                     <span class="newsletter-card-post-theme"><%= post.theme.name %></span>
-                    <span class="newsletter-card-post-title"><%= post.title %></span>
+                    <span class="newsletter-card-post-title"><%= post.display_title %></span>
                   </div>
                 <% end %>
               </div>

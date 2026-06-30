@@ -35,4 +35,23 @@ module ApplicationHelper
 
     doc.to_html.html_safe
   end
+
+  def post_display_content(post)
+    return with_image_sources(post.content) unless post.theme.name == "Qui suis-je ?"
+
+    doc = Nokogiri::HTML.fragment(post.content.to_s)
+    doc.at_css("h3")&.remove
+    doc.css("figure").each do |figure|
+      node = figure.next_sibling
+      node = node.next_sibling while node&.text? && node.text.strip.empty?
+      while node&.element? && node.name == "p"
+        classes = node["class"].to_s.split
+        node["class"] = (classes | ["image-source"]).join(" ")
+        node = node.next_sibling
+        node = node.next_sibling while node&.text? && node.text.strip.empty?
+      end
+    end
+
+    doc.to_html.html_safe
+  end
 end
