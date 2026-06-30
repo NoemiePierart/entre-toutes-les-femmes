@@ -1,25 +1,26 @@
 <% content_for :title, @theme.name %>
 <% content_for :description, @theme.description.presence || "Découvrez les articles de la rubrique #{@theme.name} — Entre toutes les femmes." %>
-<% if @theme.image.attached? %>
-  <% content_for :og_image, absolute_asset_url(@theme.image) %>
-<% end %>
+<% content_for :og_image, request.base_url + "/og-theme-#{@theme.name.parameterize}.png" %>
 
 <div class="theme-show-page">
 
-  <%# Hero + Description %>
-  <div class="container theme-show-hero-wrap">
-    <div class="theme-show-hero-frame" <% if @theme.image.attached? %>style="background-image: url('<%= variant_url(@theme.image, resize_to_limit: [1400, 800], format: :webp) %>')"<% end %>>
-      <div class="theme-show-hero-overlay"></div>
-      <div class="home-hero-content">
-        <h1 class="home-hero-title"><%= @theme.name %></h1>
+  <%# Hero — pleine largeur %>
+  <div class="theme-show-hero-frame" <% if @theme.image.attached? %>style="background-image: url('<%= variant_url(@theme.image, resize_to_limit: [1400, 800], format: :webp) %>')"<% end %>>
+    <div class="theme-show-hero-overlay"></div>
+    <div class="theme-show-hero-content">
+      <span class="theme-show-hero-rubrique">Rubrique</span>
+      <h1 class="theme-show-hero-title"><%= @theme.name %></h1>
+    </div>
+  </div>
+
+  <%# Carte flottante — description seule %>
+  <% if @theme.description.present? %>
+    <div class="theme-show-desc-wrap">
+      <div class="theme-show-desc-card">
+        <p class="theme-show-desc-text"><%= @theme.description %></p>
       </div>
     </div>
-    <% if @theme.description.present? %>
-      <div class="theme-show-desc">
-        <h2 class="theme-show-desc-text"><%= @theme.description %></h2>
-      </div>
-    <% end %>
-  </div>
+  <% end %>
 
   <%# Posts %>
   <div class="theme-show-posts">

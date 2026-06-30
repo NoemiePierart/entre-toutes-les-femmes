@@ -243,12 +243,7 @@
 // Theme show
 .theme-show-page {
   background: white;
-  padding: 3rem 0 5rem;
-}
-
-.theme-show-hero-wrap {
-  max-width: 992px;
-  margin: 0 auto 3rem;
+  padding-bottom: 5rem;
 }
 
 .theme-show-hero-frame {
@@ -256,12 +251,12 @@
   background-color: $navy;
   background-size: cover;
   background-position: center;
-  min-height: 250px;
+  min-height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 4rem 3rem;
+  padding: 3rem 2rem 7rem;
 
   &::after {
     content: "";
@@ -276,24 +271,56 @@
 .theme-show-hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba($navy, 0.28);
+  background: rgba($navy, 0.32);
 }
 
-.theme-show-desc {
+.theme-show-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.theme-show-hero-rubrique {
+  font-family: $body-font;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.theme-show-hero-title {
+  font-family: $headers-font;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  color: white;
+}
+
+.theme-show-desc-wrap {
+  max-width: 992px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.theme-show-desc-card {
+  max-width: 780px;
+  margin: -4.5rem auto 0;
   background: white;
-  padding: 1.5rem 2rem;
-  text-align: center;
-  border-top: none;
+  box-shadow: 0 4px 36px rgba($navy, 0.14);
+  padding: 1.75rem 2.75rem;
+  border-top: 3px solid $burgundy;
+  position: relative;
+  z-index: 3;
 }
 
 .theme-show-desc-text {
-  font-size: 1.6rem;
-  font-family: $headers-font;
+  font-size: 1rem;
+  font-family: $body-font;
   font-weight: 400;
-  color: $navy;
-  max-width: 680px;
-  margin: 0 auto 3rem;
-  text-align: center;
+  color: $text;
+  line-height: 1.75;
+  margin: 0;
 }
 
 .post-card-title {
@@ -313,7 +340,7 @@
 
 .theme-show-posts {
   max-width: 992px;
-  margin: 0 auto;
+  margin: 3rem auto 0;
   padding: 0 1rem;
 
   .theme-cards {
