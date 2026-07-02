@@ -53,7 +53,7 @@
           <span class="newsletter-show-post-theme"><%= post.theme.name %></span>
           <h2 class="newsletter-show-post-title"><%= post.display_title %></h2>
           <div class="post-content">
-            <%= with_image_sources(post.content) %>
+            <%= post_display_content(post) %>
           </div>
           <% if current_user&.admin? %>
             <div class="newsletter-show-post-actions">
