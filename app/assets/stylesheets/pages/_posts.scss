@@ -1,9 +1,10 @@
 .image-source {
   font-family: "Courier New", courier, monospace;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-style: italic;
-  color: mix($near-black, white, 45%);
+  color: $text;
   text-align: center;
+  margin-top: 12px;
   margin-bottom: 1.5rem;
 }
 
@@ -373,6 +374,7 @@
 .newsletter-show-date {
   font-family: "Courier New", courier, monospace;
   font-size: 1.2rem;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.8);
   margin: 0;
 }
