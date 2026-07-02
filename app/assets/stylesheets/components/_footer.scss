@@ -6,6 +6,7 @@
 }
 
 .footer-subscribe-card {
+  background: white;
   border: 1.5px solid $steel-blue;
   border-radius: 10px;
   padding: 2.5rem 3rem;
@@ -29,16 +30,26 @@
   margin-bottom: 1.25rem;
 }
 
+.footer-subscribe-divider {
+  max-width: 60px;
+  margin: 0 auto 1.6rem;
+  border: none;
+  border-top: 1.5px solid $steel-blue;
+  opacity: 0.5;
+}
+
 .footer-subscribe-card-banner {
   text-align: center;
 }
 
 .footer-subscribe-card-banner-title {
-  font-family: $headers-font;
-  font-size: 1.2rem;
-  font-weight: 400;
+  font-family: $body-font;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   color: $navy;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
 }
 
 .footer-subscribe-card-banner-body {
@@ -167,8 +178,8 @@
   @media (max-width: 400px) {
     flex-direction: column;
 
-    input[type="email"] { border-right: 1px solid mix($navy, white, 35%); border-bottom: none; }
-    button { border-top: none; }
+    input[type="email"] { border-right: 1px solid mix($navy, white, 35%); border-bottom: none; border-radius: 6px 6px 0 0; }
+    button { border-top: none; border-radius: 0 0 6px 6px; }
   }
 
   input[type="email"] {
@@ -179,6 +190,7 @@
     background: white;
     border: 1px solid mix($navy, white, 35%);
     border-right: none;
+    border-radius: 6px 0 0 6px;
     color: $near-black;
     padding: 0.5rem 0.75rem;
     outline: none;
@@ -187,7 +199,9 @@
     &:focus { border-color: $steel-blue; }
   }
 
-
+  .btn {
+    border-radius: 0 6px 6px 0;
+  }
 }
 
 // ─── Footer email row ─────────────────────────────────────────
