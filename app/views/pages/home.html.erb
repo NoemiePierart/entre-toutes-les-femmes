@@ -1,9 +1,7 @@
 <% content_for :description, "Une lettre hebdomadaire pour nourrir, encourager et éclairer les femmes chrétiennes" %>
 <% content_for :og_image, request.base_url + "/og-image.png" %>
-<% if @hero_post&.thumbnail&.attached? %>
-  <% content_for :head do %>
-    <link rel="preload" as="image" href="<%= variant_url(@hero_post.thumbnail, resize_to_limit: [1400, 900], format: :webp) %>">
-  <% end %>
+<% content_for :head do %>
+  <link rel="preload" as="image" href="<%= image_path("hero-roses-dubourg.jpg") %>">
 <% end %>
 <% content_for :json_ld do %>
   <script type="application/ld+json">
@@ -13,80 +11,79 @@
 
 <%# SECTION 1 — Hero %>
 <section class="home-hero">
-  <div class="container">
-    <div class="home-hero-frame" <% if @hero_post&.thumbnail&.attached? %>style="background-image: url('<%= variant_url(@hero_post.thumbnail, resize_to_limit: [1400, 900], format: :webp) %>')"<% end %>>
-      <div class="home-hero-overlay"></div>
-      <div class="home-hero-content">
-        <h1 class="home-hero-title">Entre toutes<br><em>les femmes</em></h1>
-        <p class="home-hero-tagline">Nourrir &nbsp;·&nbsp; Encourager &nbsp;·&nbsp; Éclairer</p>
-      </div>
+  <div class="home-hero-frame" style="background-image: url('<%= image_path("hero-roses-dubourg.jpg") %>')">
+    <div class="home-hero-overlay"></div>
+    <div class="home-hero-content">
+      <h1 class="home-hero-title">Entre toutes<br><em>les femmes</em></h1>
+      <p class="home-hero-tagline">Nourrir &nbsp;·&nbsp; Encourager &nbsp;·&nbsp; Éclairer</p>
     </div>
-    <p class="home-hero-caption">« Enfant lisant » — Pierre-Auguste Renoir</p>
+  </div>
+  <div class="container">
+    <p class="home-hero-caption">Vase de fleurs (1876) — Victoria Fantin-Latour, Centraal Museum, Utrecht</p>
   </div>
 </section>
 
-<%# SECTION 2 — Rubriques %>
-<section class="home-rubriques">
+<%# SECTION 2 — Mission : the site's purpose, then one arch per rubrique %>
+<section class="home-mission">
   <div class="container">
     <h2 class="home-section-title"><i class="fa-solid fa-quote-left home-section-icon"></i> Encourager les femmes chrétiennes à vivre leur féminité de manière unifiée, en leur offrant un contenu riche de sens et beau</h2>
-    <div class="theme-cards">
+
+    <div class="home-arches">
       <% @themes.each do |theme| %>
-        <%= link_to theme_path(theme), class: "theme-card text-decoration-none" do %>
-          <div class="theme-card-image">
+        <%= link_to theme_path(theme), class: "home-arch" do %>
+          <div class="home-arch-image">
             <% if theme.image.attached? %>
-              <%= image_tag variant_url(theme.image, resize_to_limit: [800, 500], format: :webp), class: "theme-card-image-bg", alt: theme.name, loading: "lazy" %>
+              <%= image_tag variant_url(theme.image, resize_to_fill: [ 600, 660 ], format: :webp), alt: "", loading: "lazy" %>
             <% end %>
-            <div class="theme-card-inner-border"></div>
-            <h3 class="theme-card-title"><%= theme.name %></h3>
           </div>
-          <% if theme.description.present? %>
-            <p class="theme-card-desc"><%= theme.description %></p>
-          <% end %>
+          <span class="home-arch-caption">
+            <span class="home-eyebrow">Rubrique</span>
+            <span class="home-arch-name"><%= theme.name %></span>
+          </span>
         <% end %>
       <% end %>
     </div>
   </div>
 </section>
 
-<%# SECTION 3 — Newsletters %>
-<section class="home-newsletters">
-  <div class="container">
-    <h2 class="home-section-title">Une lettre hebdomadaire pour nourrir l'être intérieur</h2>
-    <% if @newsletters.any? %>
-      <div class="home-newsletter-grid">
-        <% @newsletters.each do |newsletter| %>
-          <%= link_to newsletter_path(newsletter), class: "newsletter-card text-decoration-none" do %>
-            <div class="newsletter-card-image<%= ' newsletter-card-image--empty' unless newsletter.cover_image.attached? %>">
-              <% if newsletter.cover_image.attached? %>
-                <%= image_tag variant_url(newsletter.cover_image, resize_to_limit: [360, 240], format: :webp), class: "newsletter-card-cover-img", alt: "Couverture de la lettre #{newsletter.number}", loading: "lazy" %>
-              <% end %>
-              <div class="newsletter-card-inner-border"></div>
-              <div class="newsletter-card-image-overlay">
-                <div class="newsletter-card-number">Lettre <%= newsletter.number %></div>
-                <div class="newsletter-card-date"><%= l(newsletter.published_on, format: :long) %></div>
-              </div>
-            </div>
-            <div class="newsletter-card-body">
-              <% if newsletter.liturgical_context.present? %>
-                <div class="newsletter-card-meta">
-                  <em class="newsletter-card-context"><%= newsletter.liturgical_context %></em>
+<%# SECTION 3 — Rubriques : one full-width band per rubrique, alternating backgrounds,
+    with a daily selection of its posts %>
+<section class="home-rubriques">
+  <h2 class="visually-hidden">Les rubriques</h2>
+
+  <% @themes.each_with_index do |theme, index| %>
+    <div class="home-rubrique">
+      <div class="container">
+        <div class="home-rubrique-inner">
+          <div class="home-rubrique-intro">
+            <span class="home-eyebrow">Rubrique</span>
+            <h3 class="home-rubrique-title"><%= link_to theme.name, theme_path(theme) %></h3>
+            <p class="home-rubrique-tagline"><%= theme.tagline.presence || theme.description %></p>
+            <%= link_to "Découvrir", theme_path(theme), class: "btn-primary" %>
+          </div>
+
+          <div class="home-rubrique-posts">
+            <% @selections[theme].each do |post| %>
+              <%= link_to post, class: "home-post" do %>
+                <div class="home-post-image">
+                  <%= image_tag variant_url(post.cover_image, resize_to_fill: [ 520, 390 ], format: :webp), alt: "", loading: "lazy" %>
+                </div>
+                <div class="home-post-body">
+                  <h4 class="home-post-title"><%= post.display_title %></h4>
+                  <p class="home-post-excerpt"><%= post.excerpt %></p>
                 </div>
               <% end %>
-              <div class="newsletter-card-posts-grid">
-                <% newsletter.posts.sort_by { |p| p.theme.id }.each do |post| %>
-                  <div class="newsletter-card-post">
-                    <span class="newsletter-card-post-theme"><%= post.theme.name %></span>
-                    <span class="newsletter-card-post-title"><%= post.display_title %></span>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <%# The call to action closes the last band, so it shares its background %>
+        <% if index == @themes.size - 1 %>
+          <div class="home-rubriques-cta">
+            <%= link_to "Parcourir toutes les lettres", newsletters_path, class: "btn-primary" %>
+          </div>
         <% end %>
       </div>
-      <div class="home-more">
-        <%= link_to "Voir toutes les lettres", newsletters_path, class: "btn-primary" %>
-      </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </section>

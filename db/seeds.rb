@@ -9,11 +9,13 @@ end
 
 # Themes
 qui_suis_je = Theme.find_or_create_by!(name: "Qui suis-je ?").tap do |t|
-  t.update!(description: "Pour entrer dans le mystère de la vocation féminine avec les lunettes 😎 de la foi, à partir d'écrits philosophiques, théologiques, artistiques, de la Bible, des arts…")
+  t.update!(description: "Pour entrer dans le mystère de la vocation féminine avec les lunettes 😎 de la foi, à partir d'écrits philosophiques, théologiques, artistiques, de la Bible, des arts…",
+            tagline: "Le mystère de la vocation féminine, à la lumière de la foi")
 end
 
 coin_des_mamans = Theme.find_or_create_by!(name: "Le coin des mamans").tap do |t|
-  t.update!(description: "Des contenus sur-mesure pour s'encourager mutuellement à vivre une maternité exigeante ♥️")
+  t.update!(description: "Des contenus sur-mesure pour s'encourager mutuellement à vivre une maternité exigeante ♥️",
+            tagline: "S'encourager à vivre une maternité exigeante")
 end
 
 grain_a_moudre = Theme.find_or_create_by!(name: "Du grain à moudre").tap do |t|
@@ -21,7 +23,8 @@ grain_a_moudre = Theme.find_or_create_by!(name: "Du grain à moudre").tap do |t|
 end
 
 oeuvre_art = Theme.find_or_create_by!(name: "Une œuvre d'art à savourer").tap do |t|
-  t.update!(description: "Pour le plaisir des yeux, du cœur, de l'esprit ou des oreilles – de la nourriture pour l'âme ✨ parce que si \"l'homme ne vit pas seulement de pain\" (Mt 4,4), la femme non plus, en fait.")
+  t.update!(description: "Pour le plaisir des yeux, du cœur, de l'esprit ou des oreilles – de la nourriture pour l'âme ✨ parce que si \"l'homme ne vit pas seulement de pain\" (Mt 4,4), la femme non plus, en fait.",
+            tagline: "Pour le plaisir des yeux, du cœur et des oreilles")
 end
 
 # Theme images

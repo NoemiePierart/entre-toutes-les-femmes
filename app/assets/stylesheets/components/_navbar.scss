@@ -31,6 +31,7 @@
 .navbar-lewagon .nav-link {
   font-family: $body-font;
   font-size: 1rem;
+  color: inherit;
 
   span {
     padding-bottom: 3px;
@@ -39,8 +40,6 @@
   }
 
   &:hover {
-    color: $near-black;
-
     span {
       border-bottom-color: $near-black;
     }
@@ -87,13 +86,8 @@
     padding-bottom: 0.75rem;
   }
 
-  .navbar-lewagon .navbar-collapse.show .nav-item:not(.navbar-letters-item) {
+  .navbar-lewagon .navbar-collapse.show .nav-item {
     border-bottom: 1px solid rgba(white, 0.12);
-  }
-
-  // Retire le border-bottom du dernier thème pour éviter le double trait avant le bouton
-  .navbar-lewagon .navbar-collapse.show .nav-item:has(+ .navbar-letters-item) {
-    border-bottom: none;
   }
 
   .navbar-lewagon .navbar-collapse.show .nav-link {
@@ -106,23 +100,5 @@
   .navbar-lewagon .navbar-collapse.show .nav-link-subtle {
     color: rgba(white, 0.6);
     &:hover { color: white; }
-  }
-
-  .navbar-lewagon .navbar-collapse.show .navbar-letters-item {
-    border-top: 1px solid rgba(white, 0.18);
-    border-bottom: none;
-    margin-top: 1.75rem;
-    padding: 1.25rem 0 0.5rem;
-  }
-
-  .navbar-lewagon .navbar-collapse.show .navbar-letters-btn {
-    display: inline-block;
-    background: white;
-    color: $navy;
-    padding: 0.6rem 1.75rem;
-    font-family: $body-font;
-    font-size: 1.1rem;
-    text-decoration: none;
-    &:hover { background: white; color: $navy; }
   }
 }

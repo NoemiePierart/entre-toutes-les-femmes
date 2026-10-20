@@ -1,0 +1,17 @@
+.about-page {
+  padding: 5rem 0 6rem;
+  text-align: center;
+}
+
+.about-title {
+  font-family: $headers-font;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.about-placeholder {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: $primary-color;
+}

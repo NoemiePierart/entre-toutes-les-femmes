@@ -1,10 +1,17 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
+  skip_before_action :authenticate_user!, only: [ :home, :about, :contact ]
 
   def home
-    @newsletters = Newsletter.includes(posts: [ :theme, :rich_text_content ], cover_image_attachment: :blob).order(published_on: :desc).limit(4)
     @themes = Theme.where(archived: false).with_attached_image.order(:id)
-    @hero_post = Post.includes(thumbnail_attachment: :blob).find(155)
+    @selections = @themes.index_with do |theme|
+      theme.posts.daily_selection.includes(:theme, :rich_text_content).with_attached_thumbnail.limit(3)
+    end
+  end
+
+  def about
+  end
+
+  def contact
   end
 
   def images

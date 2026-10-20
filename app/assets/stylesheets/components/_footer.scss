@@ -1,13 +1,22 @@
 // ─── Subscribe card ───────────────────────────────────────────
 
 .footer-subscribe-card-wrap {
-  background: $light-blue;
   padding: 3rem 0;
+}
+
+// White variant: the card needs a shadow to stand out
+.footer-subscribe-card-wrap--white {
+  background-color: white;
+
+  .footer-subscribe-card {
+    border-color: transparent;
+    box-shadow: 0 4px 36px rgba($ink, 0.14);
+  }
 }
 
 .footer-subscribe-card {
   background: white;
-  border: 1.5px solid $steel-blue;
+  border: 1px solid mix($primary-color, white, 40%);
   border-radius: 10px;
   padding: 2.5rem 3rem;
   text-align: center;
@@ -22,7 +31,7 @@
   color: $navy;
   margin-bottom: 0.4rem;
 
-  i { color: $steel-blue; margin-right: 0.4rem; }
+  i { color: $primary-color; margin-right: 0.4rem; }
 }
 
 .footer-subscribe-card-tagline {
@@ -34,7 +43,7 @@
   max-width: 60px;
   margin: 0 auto 1.6rem;
   border: none;
-  border-top: 1.5px solid $steel-blue;
+  border-top: 1.5px solid $primary-color;
   opacity: 0.5;
 }
 
@@ -69,8 +78,7 @@
 // ─── Site footer ──────────────────────────────────────────────
 
 .site-footer {
-  background-color: $navy;
-  border-top: 3px double white;
+  background-color: $primary-color;
 }
 
 // Shared input / button inside footer
@@ -83,7 +91,7 @@
   padding: 0.4rem 0.75rem;
   outline: none;
 
-  &::placeholder { color: mix(white, $navy, 50%); }
+  &::placeholder { color: mix(white, $primary-color, 50%); }
   &:focus { border-color: white; }
 }
 
@@ -105,7 +113,7 @@
 .footer-main {
   color: white;
   padding: 3rem 0 2.5rem;
-  border-bottom: 1px solid mix(white, $navy, 15%);
+  border-bottom: 1px solid mix(white, $primary-color, 30%);
 }
 
 .footer-brand-title {
@@ -123,7 +131,7 @@
 }
 
 .footer-brand-email {
-  font-family: "Courier New", courier, monospace;
+  font-family: $body-font;
   font-size: 0.82rem;
   text-decoration: none;
   border-bottom: 3px solid transparent;
@@ -135,12 +143,12 @@
 }
 
 
-.footer-col-title {
-  font-family: $headers-font;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: $cream;
-  margin-bottom: 0.75rem;
+.footer-theme-list {
+  padding-left: 1.1rem;
+  margin: 0;
+  color: white;
+
+  li::marker { color: inherit; }
 }
 
 .footer-theme-link {
@@ -204,38 +212,11 @@
   }
 }
 
-// ─── Footer email row ─────────────────────────────────────────
-
-.footer-email-row {
-  text-align: center;
-  padding-top: 2rem;
-  margin-top: 2rem;
-  border-top: 1px solid mix($cream, $navy, 15%);
-}
-
-.footer-email-link {
-  font-family: "Courier New", courier, monospace;
-  font-size: 1rem;
-  text-decoration: none;
-  letter-spacing: 0.03em;
-  border-bottom: 3px solid transparent;
-  transition: border-bottom-color 0.15s ease;
-  color: white;
-  i {
-    margin-right: 0.5rem;
-    font-size: 1.1em;
-  }
-
-  &:hover {
-    border-bottom-color: $cream;
-  }
-}
-
 // ─── Bottom bar ───────────────────────────────────────────────
 
 .footer-bottom {
   padding: 1rem 0;
-  font-family: "Courier New", courier, monospace;
+  font-family: $body-font;
   font-size: 0.78rem;
   color: white;
   text-align: center;

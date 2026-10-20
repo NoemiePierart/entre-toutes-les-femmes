@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :newsletters, only: [ :index, :show ], path: "lettres"
   resources :themes, only: [ :show ]
   resources :posts
+  get "a-propos", to: "pages#about", as: :about
+  get "contact", to: "pages#contact", as: :contact
   get "images", to: "pages#images", as: :images_index
   post "subscribe", to: "subscriptions#create", as: :subscribe
   post "webhooks/brevo", to: "webhooks#brevo", as: :brevo_webhook

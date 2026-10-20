@@ -1,9 +1,14 @@
+// Brand colors
+$primary-color:   #A97C6E;  // primary (buttons, accents)
+$secondary-color: #F8E9E3;  // secondary (soft backgrounds)
+$ink:             #0D141A;  // headings and text
+
 // Newsletter palette
 $cream:       #FFF3D6;  // warm background (kept for text/border uses)
 $light-blue:  #F0F8FA;  // page section backgrounds
-$navy:        #0D223F;  // headings, dividers, primary
-$near-black:  #212529;  // legacy
-$text:        #49475C;  // body text
+$navy:        $ink;     // headings, dividers
+$near-black:  $ink;     // legacy
+$text:        $ink;     // body text
 $burgundy:    #6C1332;  // quotes, accents
 $steel-blue:  #5E8AA2;  // highlighted text, links
 

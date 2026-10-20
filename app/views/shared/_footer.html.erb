@@ -1,7 +1,9 @@
 <footer class="site-footer">
 
-  <%# ── Subscribe card ── %>
-  <div class="footer-subscribe-card-wrap">
+  <%# ── Subscribe card (hidden on the contact page) ── %>
+  <% unless current_page?(contact_path) %>
+  <%# On the homepage the last rubrique band is pink, so the subscribe area switches to white %>
+  <div class="footer-subscribe-card-wrap <%= current_page?(root_path) ? "footer-subscribe-card-wrap--white" : "secondary-background" %>">
     <div class="container">
 
       <%# Part 1 — Formulaire (blue border) %>
@@ -28,6 +30,7 @@
 
     </div>
   </div>
+  <% end %>
 
   <%# ── Main section : brand + categories ── %>
   <div class="footer-main">
@@ -40,25 +43,22 @@
         </div>
 
         <div class="col-12 col-md-7">
-          <div class="row g-2 justify-content-end">
-            <% @nav_themes&.each do |theme| %>
-              <div class="col-6">
-                <%= link_to theme_path(theme), class: "footer-theme-link" do %><span><%= theme.name %></span><% end %>
-              </div>
-            <% end %>
+          <div class="row g-4">
             <div class="col-6">
+              <ul class="footer-theme-list">
+                <% @nav_themes&.each do |theme| %>
+                  <li><%= link_to theme_path(theme), class: "footer-theme-link" do %><span><%= theme.name %></span><% end %></li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="col-6">
+              <%= link_to about_path, class: "footer-theme-link" do %><span>À propos</span><% end %>
               <%= link_to newsletters_path, class: "footer-theme-link" do %><span>Toutes les lettres</span><% end %>
+              <%= link_to contact_path, class: "footer-theme-link" do %><span>Contact</span><% end %>
             </div>
           </div>
         </div>
 
-      </div>
-
-      <div class="footer-email-row">
-        <a href="mailto:bonjour@entretouteslesfemmes.fr" class="footer-email-link">
-          <i class="fa-regular fa-envelope"></i>
-          bonjour@entretouteslesfemmes.fr
-        </a>
       </div>
 
     </div>

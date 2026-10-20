@@ -1,5 +1,5 @@
 .image-source {
-  font-family: "Courier New", courier, monospace;
+  font-family: $body-font;
   font-size: 0.8rem;
   font-style: italic;
   color: $text;
@@ -91,7 +91,7 @@
 }
 
 .newsletter-card-date {
-  font-family: "Courier New", courier, monospace;
+  font-family: $body-font;
   font-size: 1.1rem;
   color: rgba(255, 255, 255, 0.88);
 }
@@ -117,7 +117,7 @@
 }
 
 .newsletter-card-post-theme {
-  font-family: "Courier New", courier, monospace;
+  font-family: $body-font;
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -150,7 +150,7 @@
 }
 
 .newsletter-row-meta {
-  font-family: "Courier New", courier, monospace;
+  font-family: $body-font;
   font-size: 0.85rem;
   color: mix($near-black, white, 50%);
 }
@@ -164,7 +164,7 @@
 }
 
 .newsletter-meta {
-  font-family: "Courier New", courier, monospace;
+  font-family: $body-font;
   font-size: 0.9rem;
   color: mix($near-black, white, 55%);
   margin-bottom: 0.5rem;
@@ -202,7 +202,7 @@
   }
 
   .badge {
-    font-family: "Courier New", courier, monospace;
+    font-family: $body-font;
     font-size: 0.75rem;
     font-weight: normal;
     background-color: $light-blue !important;
@@ -220,7 +220,7 @@
   }
 
   .card-text {
-    font-family: "Courier New", courier, monospace;
+    font-family: $body-font;
     font-size: 0.85rem;
   }
 
@@ -242,7 +242,7 @@
   padding: 3rem;
 
   .post-badge {
-    font-family: "Courier New", courier, monospace;
+    font-family: $body-font;
     font-size: 0.8rem;
     font-weight: normal;
     color: $navy;
@@ -262,7 +262,7 @@
   }
 
   .post-meta {
-    font-family: "Courier New", courier, monospace;
+    font-family: $body-font;
     font-size: 0.85rem;
     color: mix($near-black, white, 50%);
   }
@@ -317,7 +317,6 @@
 
 // Newsletter show
 .newsletter-show-hero {
-  background: $light-blue;
   padding: 3rem 0;
 }
 
@@ -372,7 +371,7 @@
 }
 
 .newsletter-show-date {
-  font-family: "Courier New", courier, monospace;
+  font-family: $body-font;
   font-size: 1.2rem;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.8);
@@ -389,7 +388,6 @@
 }
 
 .newsletter-show-body {
-  background: $light-blue;
   padding-bottom: 5rem;
 }
 
@@ -409,7 +407,7 @@
 
 .newsletter-show-post-theme {
   display: inline-block;
-  font-family: "Courier New", courier, monospace;
+  font-family: $body-font;
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -440,4 +438,14 @@
   padding-top: 1rem;
   border-top: 1px solid mix($navy, white, 10%);
   text-align: right;
+}
+
+// Letters section title
+.blog-index-title {
+  font-family: $headers-font;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: $navy;
+  border-bottom: 1px solid $navy;
+  padding-bottom: 0.4rem;
 }

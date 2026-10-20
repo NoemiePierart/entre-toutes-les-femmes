@@ -1,0 +1,176 @@
+// Theme cards
+.theme-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  text-align: left;
+  margin-bottom: 0;
+  padding: 0.5rem;
+
+  @media (min-width: 992px) {
+
+      grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.theme-card {
+  color: $near-black;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba($navy, 0.10);
+
+    .theme-card-image-bg {
+      transform: scale(1.06);
+    }
+  }
+}
+
+.theme-card-image {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background-color: mix($navy, white, 12%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.theme-card-image-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.theme-card-desc {
+  flex: 1;
+  font-family: $body-font;
+  font-size: 1.1rem;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  background: white;
+}
+
+// Theme show
+.theme-show-page {
+  background: white;
+  padding-bottom: 5rem;
+}
+
+.theme-show-hero-frame {
+  position: relative;
+  background-color: $navy;
+  background-size: cover;
+  background-position: 50% 0%;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 2rem 7rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+.theme-show-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba($navy, 0.32);
+}
+
+.theme-show-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.theme-show-hero-rubrique {
+  font-family: $body-font;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.theme-show-hero-title {
+  font-family: $headers-font;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  color: white;
+}
+
+.theme-show-desc-wrap {
+  max-width: 992px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.theme-show-desc-card {
+  max-width: 780px;
+  margin: -4.5rem auto 0;
+  background: white;
+  box-shadow: 0 4px 36px rgba($navy, 0.14);
+  padding: 1.75rem 2.75rem;
+  position: relative;
+  z-index: 3;
+}
+
+.theme-show-desc-text {
+  font-size: 1rem;
+  font-family: $body-font;
+  font-weight: 400;
+  color: $text;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.post-card-title {
+  font-family: $headers-font;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: $navy;
+  margin-bottom: 0.3rem;
+}
+
+.post-card-date {
+  font-family: $body-font;
+  font-size: 0.8rem;
+  color: mix($near-black, white, 50%);
+  margin: 0;
+}
+
+.theme-show-posts {
+  max-width: 992px;
+  margin: 3rem auto 0;
+  padding: 0 1rem;
+
+  .theme-cards {
+    gap: 1.5rem;
+
+    @media (min-width: 576px) and (max-width: 992px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 992px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}

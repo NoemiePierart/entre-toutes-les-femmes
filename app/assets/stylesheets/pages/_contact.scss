@@ -1,0 +1,57 @@
+.contact-page {
+  padding: 5rem 0 6rem;
+}
+
+.contact-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 3rem 2.75rem;
+  background: white;
+  box-shadow: 0 4px 36px rgba($ink, 0.14);
+  text-align: center;
+
+  @media (max-width: 575.98px) {
+    padding: 2.25rem 1.5rem;
+  }
+}
+
+.contact-icon {
+  color: $primary-color;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.contact-title {
+  font-family: $headers-font;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.contact-intro {
+  font-size: 1.1rem;
+  margin-bottom: 1.75rem;
+}
+
+.contact-text {
+  margin-bottom: 0.4rem;
+}
+
+.contact-email {
+  display: inline-block;
+  font-size: 1.15rem;
+  color: $primary-color;
+  border-bottom: 1px solid $primary-color;
+  margin-bottom: 1.75rem;
+  word-break: break-word;
+
+  &:hover {
+    color: $ink;
+    border-bottom-color: $ink;
+  }
+}
+
+.contact-outro {
+  font-style: italic;
+  margin: 0;
+}

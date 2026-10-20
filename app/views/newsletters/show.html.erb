@@ -25,7 +25,7 @@
 </div>
 
 <%# Hero %>
-<section class="newsletter-show-hero">
+<section class="newsletter-show-hero secondary-background">
   <div class="container">
     <div class="newsletter-show-hero-frame" <% if @newsletter.cover_image.attached? %>style="background-image: url('<%= variant_url(@newsletter.cover_image, resize_to_limit: [1400, 700], format: :webp) %>')"<% end %>>
       <div class="newsletter-show-hero-overlay"></div>
@@ -45,7 +45,7 @@
 </section>
 
 <%# Posts %>
-<div class="newsletter-show-body">
+<div class="newsletter-show-body secondary-background">
   <div class="container">
     <div class="newsletter-show-posts">
       <% @posts.each do |post| %>
