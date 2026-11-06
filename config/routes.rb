@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   resources :newsletters, only: [ :index, :show ], path: "lettres"
   get "themes/qui-suis-je", to: redirect("/themes/mystere-feminin")
   resources :themes, only: [ :show ]
-  resources :posts
+  # French URLs (/articles/…); old /posts/… links, as in sent letters, still work
+  resources :posts, path: "articles"
+  get "posts", to: redirect("/articles")
+  get "posts/:id", to: redirect("/articles/%{id}")
   get "auteur", to: "pages#about", as: :about
   get "a-propos", to: redirect("/auteur")
   get "contact", to: "pages#contact", as: :contact

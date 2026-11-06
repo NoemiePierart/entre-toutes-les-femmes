@@ -21,6 +21,14 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
+  test "articles live under /articles, and old /posts links redirect there" do
+    assert_equal "/articles/#{@post.to_param}", post_path(@post)
+
+    get "/posts/#{@post.to_param}"
+    assert_redirected_to "/articles/#{@post.to_param}"
+    assert_response :moved_permanently
+  end
+
   test "show is public" do
     get post_url(@post)
 

@@ -25,9 +25,14 @@ class Post < ApplicationRecord
     thumbnail.attached? ? thumbnail : theme.image
   end
 
+  # Mystère féminin shows the letter's own heading. A heading that is all one
+  # quotation loses its quotes; quotes inside it become French « ».
   def display_title
     return title unless theme.name == "Mystère féminin"
-    (rich_text_content.body.to_html.match(/<h3[^>]*>(.*?)<\/h3>/i)&.captures&.first&.gsub(/<[^>]+>/, "") || title).sub(/[[:alpha:]]/) { |c| c.upcase }
+
+    text = source_title
+    text = text[1..-2].strip if text.match?(/\A"[^"]*"\z/)
+    text.gsub(/"([^"]*)"/) { "«\u00A0#{$1.strip}\u00A0»" }.sub(/[[:alpha:]]/, &:upcase)
   end
 
   def cover_image?
@@ -38,10 +43,22 @@ class Post < ApplicationRecord
   # "[Lettre 21 : …]" reminder or the "Chères mamans," greeting.
   def excerpt(length = 170)
     text = content.to_plain_text.squish
-    text = text.delete_prefix(display_title).strip if text.downcase.start_with?(display_title.downcase)
+    # The heading's case can differ from the title's ("bienheureuse" / "Bienheureuse")
+    text = text[source_title.length..].strip if text.downcase.start_with?(source_title.downcase)
     text = text.sub(/\A\[[^\]]*\]\s*/, "").sub(/\AChères mamans,?\s*/i, "")
     # Paragraphs can end up glued together ("(1897)A savourer"): restore the space.
     text = text.gsub(/([)\]])(\p{L})/, '\1 \2').gsub(/([.!?»]|\p{Ll})(\p{Lu})(?=[\p{Ll}\s'’])/, '\1 \2')
     text.sub(/[[:alpha:]]/, &:upcase).truncate(length, separator: " ", omission: "…")
+  end
+
+  private
+
+  # The title as written: the letter's heading for Mystère féminin, read as text
+  # so entities like &nbsp; come out as characters
+  def source_title
+    return title unless theme.name == "Mystère féminin"
+
+    heading = Nokogiri::HTML.fragment(rich_text_content.body.to_html).at_css("h3")&.text&.squish
+    heading.presence || title
   end
 end

@@ -1,5 +1,7 @@
 <footer class="site-footer">
 
+  <%# Pages can drop the two calls (the legal pages do) %>
+  <% unless content_for?(:hide_footer_calls) %>
   <%# ── Two calls, built the same way, each on its own band: painting on the left, content on the right ── %>
   <div class="footer-call footer-call--white">
     <div class="container">
@@ -45,6 +47,8 @@
   </div>
 
   <%# ── Main section : brand + links ── %>
+  <% end %>
+
   <div class="footer-main">
     <div class="container">
       <%# One line: brand on the left, links on the right (stacked on phones) %>
