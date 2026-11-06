@@ -1,5 +1,5 @@
 #!/bin/bash
-# Installs a daily dump of the production database on the server (3:15, kept 14 days)
+# Installs a daily dump of the production database on the server (3:15, kept 3 months)
 # and makes a first dump right away. Safe to run again.
 set -euo pipefail
 
@@ -12,8 +12,8 @@ set -euo pipefail
 install -d -m 700 -o postgres -g postgres $BACKUP_DIR
 
 cat > /etc/cron.d/etlf-db-backup <<'CRON'
-# Daily dump of the Entre toutes les femmes database, kept 14 days
-15 3 * * * postgres pg_dump -Fc $PROD_DB -f $BACKUP_DIR/etlf-\$(date +\\%F).dump && find $BACKUP_DIR -name '*.dump' -mtime +14 -delete
+# Daily dump of the Entre toutes les femmes database, kept 3 months
+15 3 * * * postgres pg_dump -Fc $PROD_DB -f $BACKUP_DIR/etlf-\$(date +\\%F).dump && find $BACKUP_DIR -name '*.dump' -mtime +92 -delete
 CRON
 chmod 644 /etc/cron.d/etlf-db-backup
 
