@@ -6,8 +6,12 @@ module ApplicationHelper
     url.start_with?("http") ? url : request.base_url + url
   end
 
+  # Blobs stored on Cloudinary are transformed by Cloudinary; others (local
+  # development uploads) go through Active Storage variants.
   def variant_url(attachment, **transforms)
     blob = attachment.blob
+    return url_for(attachment.variant(**transforms)) unless blob.service_name == "cloudinary"
+
     crop_type = transforms[:resize_to_fill] ? :fill : :limit
     dims = transforms[:resize_to_limit] || transforms[:resize_to_fill]
     cl_options = { quality: :auto }
@@ -37,7 +41,7 @@ module ApplicationHelper
   end
 
   def post_display_content(post)
-    return with_image_sources(post.content) unless post.theme.name == "Qui suis-je ?"
+    return with_image_sources(post.content) unless post.theme.name == "Mystère féminin"
 
     doc = Nokogiri::HTML.fragment(post.content.to_s)
     doc.at_css("h3")&.remove

@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   get "admin", to: redirect("/users/sign_in"), as: :admin_login
   resources :newsletters, only: [ :index, :show ], path: "lettres"
+  get "themes/qui-suis-je", to: redirect("/themes/mystere-feminin")
   resources :themes, only: [ :show ]
   resources :posts
-  get "a-propos", to: "pages#about", as: :about
+  get "auteur", to: "pages#about", as: :about
+  get "a-propos", to: redirect("/auteur")
   get "contact", to: "pages#contact", as: :contact
   get "images", to: "pages#images", as: :images_index
   post "subscribe", to: "subscriptions#create", as: :subscribe

@@ -2,11 +2,17 @@ require "nokogiri"
 
 class BrevoNewsletterParser
   KNOWN_THEMES = [
-    "Qui suis-je ?",
+    "Mystère féminin",
     "Le coin des mamans",
     "Du grain à moudre",
-    "Une œuvre d'art à savourer"
+    "Une œuvre d'art à savourer",
+    "Pensées diverses"
   ].freeze
+
+  # Headings the e-mails used before a theme was renamed on the site
+  THEME_ALIASES = {
+    "Qui suis-je ?" => "Mystère féminin"
+  }.freeze
 
   SKIP_PHRASES = [
     "Vous aussi vous souhaitez partager"
@@ -71,8 +77,9 @@ class BrevoNewsletterParser
 
     h1s.each_with_index do |h1, idx|
       theme_name    = h1.text.strip.gsub(/\s+/, " ")
-      matched_theme = KNOWN_THEMES.find { |t| theme_name.start_with?(t) }
-      next unless matched_theme
+      matched_heading = (KNOWN_THEMES + THEME_ALIASES.keys).find { |t| theme_name.start_with?(t) }
+      next unless matched_heading
+      matched_theme = THEME_ALIASES.fetch(matched_heading, matched_heading)
 
       nodes = collect_nodes_until(h1, h1s[idx + 1])
       html  = nodes_to_html(nodes)

@@ -1,0 +1,17 @@
+<%# Replaced in place by SubscriptionsController#create (Turbo Stream), so the
+    answer appears where the visitor clicked rather than at the top of the page %>
+<% status = local_assigns[:status] %>
+<% message = local_assigns[:message] %>
+<div id="footer-subscribe">
+  <% if status == :ok %>
+    <p class="footer-subscribe-thanks" role="status"><%= message %></p>
+  <% else %>
+    <%= form_with url: subscribe_path, class: "footer-subscribe-form" do |f| %>
+      <%= f.email_field :email, value: local_assigns[:email], placeholder: "Votre adresse e-mail", required: true, "aria-label": "Votre adresse e-mail" %>
+      <%= f.submit "Je m’abonne" %>
+    <% end %>
+    <% if message %>
+      <p class="footer-subscribe-error" role="alert"><%= message %></p>
+    <% end %>
+  <% end %>
+</div>

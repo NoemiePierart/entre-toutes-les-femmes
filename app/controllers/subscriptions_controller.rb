@@ -2,18 +2,33 @@ class SubscriptionsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def create
-    email = params[:email].to_s.strip
+    @email = params[:email].to_s.strip
 
-    unless email.match?(/\A[^@\s]+@[^@\s]+\.[^@\s]+\z/)
-      return redirect_back fallback_location: root_path, alert: "Adresse e-mail invalide."
+    unless @email.match?(/\A[^@\s]+@[^@\s]+\.[^@\s]+\z/)
+      return respond_with(:alert, "Adresse e-mail invalide.")
     end
 
-    BrevoClient.new.subscribe(email)
-    redirect_back fallback_location: root_path, notice: "Merci ! Vous recevrez bientôt la prochaine lettre."
+    BrevoClient.new.subscribe(@email)
+    respond_with(:ok, "Merci ! Vous recevrez bientôt la prochaine lettre.")
   rescue KeyError
-    redirect_back fallback_location: root_path, alert: "L'abonnement n'est pas encore configuré (BREVO_LIST_ID manquant)."
+    respond_with(:alert, "L'abonnement n'est pas encore configuré (BREVO_LIST_ID manquant).")
   rescue => e
     Rails.logger.error "Brevo subscription error: #{e.message}"
-    redirect_back fallback_location: root_path, alert: "Une erreur est survenue. Veuillez réessayer."
+    respond_with(:alert, "Une erreur est survenue. Veuillez réessayer.")
+  end
+
+  private
+
+  # Turbo replaces the form with the answer in place; plain requests keep the flash
+  def respond_with(status, message)
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: answer_stream(status, message), status: status == :ok ? :ok : :unprocessable_entity }
+      format.html { redirect_back fallback_location: root_path, (status == :ok ? :notice : :alert) => message }
+    end
+  end
+
+  def answer_stream(status, message)
+    turbo_stream.replace("footer-subscribe", partial: "shared/subscribe_form",
+                         locals: { status: status, message: message, email: @email })
   end
 end

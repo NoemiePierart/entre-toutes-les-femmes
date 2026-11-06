@@ -1,6 +1,7 @@
 <% content_for :title, @theme.name %>
 <% content_for :description, @theme.description.presence || "Découvrez les articles de la rubrique #{@theme.name} — Entre toutes les femmes." %>
-<% content_for :og_image, request.base_url + "/og-theme-#{@theme.name.parameterize}.png" %>
+<% og_image_file = "og-theme-#{@theme.name.parameterize}.png" %>
+<% content_for :og_image, request.base_url + "/#{og_image_file}" if Rails.public_path.join(og_image_file).exist? %>
 
 <div class="theme-show-page">
 
@@ -13,12 +14,18 @@
     </div>
   </div>
 
-  <%# Carte flottante — description seule %>
-  <% if @theme.description.present? %>
+  <%# Carte flottante — description, puis la légende du tableau %>
+  <% credit = @theme.image_credit if @theme.image.attached? %>
+  <% if @theme.description.present? || credit %>
     <div class="theme-show-desc-wrap">
-      <div class="theme-show-desc-card">
-        <p class="theme-show-desc-text"><%= @theme.description %></p>
-      </div>
+      <% if @theme.description.present? %>
+        <div class="theme-show-desc-card">
+          <p class="theme-show-desc-text"><%= @theme.description %></p>
+        </div>
+      <% end %>
+      <% if credit %>
+        <p class="theme-show-credit"><%= credit %></p>
+      <% end %>
     </div>
   <% end %>
 

@@ -35,9 +35,9 @@
     <%= yield :head %>
     <%= yield :json_ld %>
 
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
-    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+    <%# sizes="48x48" rather than "any", so browsers that support it prefer the SVG, which adapts to dark mode %>
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
 

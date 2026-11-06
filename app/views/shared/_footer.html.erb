@@ -1,64 +1,61 @@
 <footer class="site-footer">
 
-  <%# ── Subscribe card (hidden on the contact page) ── %>
-  <% unless current_page?(contact_path) %>
-  <%# On the homepage the last rubrique band is pink, so the subscribe area switches to white %>
-  <div class="footer-subscribe-card-wrap <%= current_page?(root_path) ? "footer-subscribe-card-wrap--white" : "secondary-background" %>">
+  <%# ── Two calls, built the same way, each on its own band: painting on the left, content on the right ── %>
+  <div class="footer-call footer-call--white">
     <div class="container">
+      <div class="footer-call-grid">
+        <figure class="footer-call-figure">
+          <%= image_tag "footer-fragonard-lettre.jpg", alt: "", loading: "lazy", class: "footer-call-painting" %>
+          <figcaption>La Lettre d’amour (vers 1770) — Jean-Honoré Fragonard</figcaption>
+        </figure>
 
-      <%# Part 1 — Formulaire (blue border) %>
-      <div class="footer-subscribe-card">
-        <h2 class="footer-subscribe-card-title">
-          <i class="fa-regular fa-envelope"></i> Recevoir la lettre
-        </h2>
-        <p class="footer-subscribe-card-tagline">Chaque dimanche, directement dans votre boîte mail.</p>
-        <%= form_with url: subscribe_path, class: "footer-subscribe-form" do |f| %>
-          <%= f.email_field :email, placeholder: "Votre adresse e-mail", required: true %>
-          <%= f.submit "S'abonner", class: "btn btn-primary" %>
-        <% end %>
+        <div class="footer-call-inner">
+          <h2 class="footer-call-title">
+            <span class="footer-call-title-line">
+              <span class="footer-call-picto footer-call-picto--envelope" aria-hidden="true"></span>
+              Recevoir les prochaines Lettres
+            </span>
+          </h2>
+          <%= render "shared/subscribe_form" %>
+        </div>
       </div>
-
-      <hr class="footer-subscribe-divider">
-
-      <%# Part 2 — Vous aussi %>
-      <div class="footer-subscribe-card-banner">
-        <p class="footer-subscribe-card-banner-title">Une œuvre vous a touchée ?</p>
-        <p class="footer-subscribe-card-banner-body">Vous aussi vous souhaitez partager un coup de cœur ❤, un enthousiasme, une émotion artistique&nbsp;?</p>
-        <p class="footer-subscribe-card-banner-body">La semaine prochaine, nous pourrions savourer ensemble votre œuvre d'art&nbsp;🌟</p>
-        <p class="footer-subscribe-card-banner-body">Partagez vos idées en nous écrivant à <a href="mailto:bonjour@entretouteslesfemmes.fr" class="footer-subscribe-card-link">bonjour@entretouteslesfemmes.fr</a></p>
-      </div>
-
     </div>
   </div>
-  <% end %>
 
-  <%# ── Main section : brand + categories ── %>
+  <div class="footer-call footer-call--rose">
+    <div class="container">
+      <div class="footer-call-grid">
+        <figure class="footer-call-figure">
+          <%= image_tag "footer-renoir-roses.jpg", alt: "", loading: "lazy", class: "footer-call-painting" %>
+          <figcaption>Roses dans un vase vert (1911) — Auguste Renoir</figcaption>
+        </figure>
+
+        <div class="footer-call-inner">
+          <h2 class="footer-call-title">
+            <span class="footer-call-title-line">
+              <span class="footer-call-picto footer-call-picto--pen" aria-hidden="true"></span>
+              Une œuvre d’art vous a touchée&nbsp;?
+            </span>
+          </h2>
+          <p>Vous aussi vous souhaitez partager un coup de cœur ❤, un enthousiasme, une émotion artistique&nbsp;? La fois prochaine, nous pourrions savourer ensemble votre œuvre d’art&nbsp;🌟</p>
+          <p>Écrivez-nous à <a href="mailto:bonjour@entretouteslesfemmes.fr" class="footer-call-link">bonjour@entretouteslesfemmes.fr</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# ── Main section : brand + links ── %>
   <div class="footer-main">
     <div class="container">
-      <div class="row g-5 align-items-start">
+      <%# One line: brand on the left, links on the right (stacked on phones) %>
+      <div class="footer-main-row">
+        <p class="footer-brand-title">Entre toutes <em>les femmes</em></p>
 
-        <div class="col-12 col-md-5">
-          <p class="footer-brand-title">Entre toutes <em>les femmes</em></p>
-          <p class="footer-brand-tagline">Nourrir, encourager, éclairer</p>
-        </div>
-
-        <div class="col-12 col-md-7">
-          <div class="row g-4">
-            <div class="col-6">
-              <ul class="footer-theme-list">
-                <% @nav_themes&.each do |theme| %>
-                  <li><%= link_to theme_path(theme), class: "footer-theme-link" do %><span><%= theme.name %></span><% end %></li>
-                <% end %>
-              </ul>
-            </div>
-            <div class="col-6">
-              <%= link_to about_path, class: "footer-theme-link" do %><span>À propos</span><% end %>
-              <%= link_to newsletters_path, class: "footer-theme-link" do %><span>Toutes les lettres</span><% end %>
-              <%= link_to contact_path, class: "footer-theme-link" do %><span>Contact</span><% end %>
-            </div>
-          </div>
-        </div>
-
+        <nav class="footer-links">
+          <%= link_to about_path, class: "footer-theme-link" do %><span>L’auteur</span><% end %>
+          <%= link_to newsletters_path, class: "footer-theme-link" do %><span>Toutes les lettres</span><% end %>
+          <%= link_to contact_path, class: "footer-theme-link" do %><span>Contact</span><% end %>
+        </nav>
       </div>
 
     </div>

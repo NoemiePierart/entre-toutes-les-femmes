@@ -70,7 +70,8 @@
   position: relative;
   background-color: $navy;
   background-size: cover;
-  background-position: 50% 0%;
+  // Slightly below the top: shows the faces in portrait-shaped theme images
+  background-position: 50% 30%;
   min-height: 360px;
   display: flex;
   align-items: center;
@@ -131,6 +132,17 @@
   padding: 1.75rem 2.75rem;
   position: relative;
   z-index: 3;
+}
+
+// Same discreet style as the homepage hero caption
+.theme-show-credit {
+  max-width: 780px;
+  margin: 0.6rem auto 0;
+  font-family: $body-font;
+  font-size: 0.72rem;
+  font-style: italic;
+  color: mix($near-black, white, 45%);
+  text-align: right;
 }
 
 .theme-show-desc-text {

@@ -4,6 +4,7 @@
   z-index: 1030;
   justify-content: space-between;
   background-color: white;
+  border-bottom: 1px solid $secondary-color;
   padding: 0.75rem 1.5rem;
 }
 
@@ -11,24 +12,50 @@
   flex-grow: 0;
 }
 
+// Brand: flowered medallion, thin rule, then the two-line title
+
 .navbar-lewagon .navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   font-family: $headers-font;
   font-size: 1.3rem;
   font-weight: 400;
   padding: 0;
   line-height: 1.5rem;
 
-  span {
-    display: block;
-    font-style: italic;
-  }
-
   &:hover {
     color: $navy;
   }
 }
 
+// Flowered branch, traced from the medallion drawing with thicker lines so it reads at this size
+.navbar-brand-logo {
+  height: 52px;
+  aspect-ratio: 592 / 957;
+  background-color: $primary-deep;
+  -webkit-mask: image-url("logo-fleurs.svg") center / contain no-repeat;
+  mask: image-url("logo-fleurs.svg") center / contain no-repeat;
+
+  @media (max-width: 575.98px) {
+    height: 42px;
+  }
+}
+
+.navbar-brand-rule {
+  width: 1px;
+  align-self: stretch;
+  margin: 4px 0;
+  background-color: $primary-deep;
+}
+
+.navbar-brand-title span {
+  display: block;
+  font-style: italic;
+}
+
 .navbar-lewagon .nav-link {
+  white-space: nowrap;
   font-family: $body-font;
   font-size: 1rem;
   color: inherit;
@@ -62,7 +89,8 @@
   }
 }
 
-@media (max-width: 767.98px) {
+// Collapsed menu: below xl, where the four theme links no longer fit on one line
+@media (max-width: 1199.98px) {
   .navbar-lewagon:has(.navbar-collapse.show),
   .navbar-lewagon:has(.navbar-collapse.collapsing) {
     background: $navy;
@@ -72,6 +100,11 @@
   .navbar-lewagon:has(.navbar-collapse.show) .navbar-brand,
   .navbar-lewagon:has(.navbar-collapse.collapsing) .navbar-brand {
     &:hover { color: white; }
+  }
+
+  .navbar-lewagon:has(.navbar-collapse.show) :is(.navbar-brand-logo, .navbar-brand-rule),
+  .navbar-lewagon:has(.navbar-collapse.collapsing) :is(.navbar-brand-logo, .navbar-brand-rule) {
+    background-color: $secondary-color;
   }
 
   .navbar-lewagon:has(.navbar-collapse.show) .navbar-toggler-icon,

@@ -26,7 +26,24 @@
 <%# SECTION 2 — Mission : the site's purpose, then one arch per rubrique %>
 <section class="home-mission">
   <div class="container">
-    <h2 class="home-section-title"><i class="fa-solid fa-quote-left home-section-icon"></i> Encourager les femmes chrétiennes à vivre leur féminité de manière unifiée, en leur offrant un contenu riche de sens et beau</h2>
+    <%# Framed, with quotation marks sitting on the frame %>
+    <div class="home-intro-frame">
+      <span class="home-intro-quote home-intro-quote--open" aria-hidden="true">“</span>
+      <h2 class="home-intro-lines">
+        <span>Des textes pour penser le féminin à la lumière de la foi.</span>
+        <span>Des conseils et des idées pour encourager celles qui sont devenues mères.</span>
+        <span>Des coups de cœur artistiques pour nourrir le cœur, l’âme et l’esprit.</span>
+      </h2>
+      <span class="home-intro-quote home-intro-quote--close" aria-hidden="true">”</span>
+    </div>
+
+    <div class="home-intro-text">
+      <p>«&nbsp;Entre toutes les femmes&nbsp;», cela a d’abord été une lettre hebdomadaire, un condensé de nourriture intellectuelle et spirituelle pour les femmes chrétiennes. Un encouragement à vivre sa féminité de manière unifiée, sous le regard de la foi.</p>
+      <div class="home-intro-text-accent">
+        <p>Voici désormais <%= link_to "la Lettre", newsletters_path %> plus au large. Pour une lecture plus lente, plus sélective, ou plus gloutonne&nbsp;: c’est à chacune selon sa manière. Le site contient toutes les archives des Lettres, et s’enrichira désormais de nouveaux articles… à son propre rythme.</p>
+        <p>Il est temps de reprendre la discussion où nous l’avions laissée. Qu’en pensez-vous&nbsp;?</p>
+      </div>
+    </div>
 
     <div class="home-arches">
       <% @themes.each do |theme| %>
@@ -51,7 +68,7 @@
 <section class="home-rubriques">
   <h2 class="visually-hidden">Les rubriques</h2>
 
-  <% @themes.each_with_index do |theme, index| %>
+  <% @band_themes.each_with_index do |theme, index| %>
     <div class="home-rubrique">
       <div class="container">
         <div class="home-rubrique-inner">
@@ -78,7 +95,7 @@
         </div>
 
         <%# The call to action closes the last band, so it shares its background %>
-        <% if index == @themes.size - 1 %>
+        <% if index == @band_themes.size - 1 %>
           <div class="home-rubriques-cta">
             <%= link_to "Parcourir toutes les lettres", newsletters_path, class: "btn-primary" %>
           </div>

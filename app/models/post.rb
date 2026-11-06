@@ -26,7 +26,7 @@ class Post < ApplicationRecord
   end
 
   def display_title
-    return title unless theme.name == "Qui suis-je ?"
+    return title unless theme.name == "Mystère féminin"
     (rich_text_content.body.to_html.match(/<h3[^>]*>(.*?)<\/h3>/i)&.captures&.first&.gsub(/<[^>]+>/, "") || title).sub(/[[:alpha:]]/) { |c| c.upcase }
   end
 
