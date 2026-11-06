@@ -10,10 +10,9 @@ class WebhooksController < ApplicationController
 
     return head :ok if campaign_id.zero?
 
-    ProcessedBrevoEvent.create!(campaign_id: campaign_id)
-    BrevoSyncJob.perform_later(campaign_id)
-    head :ok
-  rescue ActiveRecord::RecordNotUnique
+    # The job records the event once the letter is imported, so a failed import
+    # is retried on Brevo's next call
+    BrevoSyncJob.perform_later(campaign_id) unless ProcessedBrevoEvent.exists?(campaign_id: campaign_id)
     head :ok
   rescue JSON::ParserError
     head :bad_request

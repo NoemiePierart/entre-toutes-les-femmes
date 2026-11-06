@@ -20,29 +20,33 @@ class BrevoSyncJob < ApplicationJob
     date   = parser.date || Date.parse(campaign["sentDate"])
     admin  = User.find_by!(admin: true)
 
-    newsletter = Newsletter.create!(
-      number:             number,
-      published_on:       date,
-      liturgical_context: parser.liturgical_context,
-      cover_caption:      parser.cover_caption
-    )
-
-    parser.sections.each do |section|
-      post = Post.new(
-        title:      "#{section[:theme_name]} — Lettre #{number}",
-        theme:      Theme.find_by!(name: section[:theme_name]),
-        newsletter: newsletter,
-        user:       admin,
-        archived:   section[:archived]
-      )
-      post.content = section[:html]
-      post.save!
+    # All or nothing: a half-imported letter would be skipped on retry
+    newsletter = Newsletter.transaction do
+      Newsletter.create!(
+        number:             number,
+        published_on:       date,
+        liturgical_context: parser.liturgical_context,
+        cover_caption:      parser.cover_caption
+      ).tap do |created|
+        parser.sections.each do |section|
+          post = Post.new(
+            title:      "#{section[:theme_name]} — Lettre #{number}",
+            theme:      Theme.find_by!(name: section[:theme_name]),
+            newsletter: created,
+            user:       admin,
+            archived:   section[:archived]
+          )
+          post.content = section[:html]
+          post.save!
+        end
+      end
     end
 
     attach_cover_image(newsletter, campaign["htmlContent"])
     generate_thumbnails(newsletter)
     generate_titles(newsletter)
 
+    ProcessedBrevoEvent.create_or_find_by!(campaign_id: campaign_id)
     Rails.logger.info "BrevoSyncJob: Lettre #{number} importée avec succès."
   end
 
