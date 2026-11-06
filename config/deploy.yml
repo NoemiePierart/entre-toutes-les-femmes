@@ -45,6 +45,9 @@ env:
     - CLOUDINARY_API_KEY
     - CLOUDINARY_API_SECRET
     - ANTHROPIC_API_KEY
+    - BREVO_API_KEY
+    - BREVO_LIST_ID
+    - BREVO_WEBHOOK_SECRET
   clear:
     APP_URL: https://entretouteslesfemmes.fr
 
