@@ -50,8 +50,9 @@ Rails.application.configure do
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
 
-  # Replace the default in-process memory cache store with a durable alternative.
-  config.cache_store = :solid_cache_store
+  # In-memory cache (used by rate limiting): the production database has no
+  # Solid Cache tables, and the app runs in a single Puma process.
+  config.cache_store = :memory_store
 
   # Jobs run in threads inside the web process: the production database has no
   # Solid Queue tables and no worker runs (SOLID_QUEUE_IN_PUMA is false). The few

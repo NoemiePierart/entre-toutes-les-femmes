@@ -279,6 +279,14 @@
   color: $burgundy;
 }
 
+.footer-subscribe-note {
+  margin: 0.7rem 0 0;
+  font-size: 0.8rem;
+  color: mix($ink, white, 65%);
+
+  a { color: inherit; }
+}
+
 // ─── Bottom bar ───────────────────────────────────────────────
 
 .footer-bottom {
@@ -287,4 +295,15 @@
   font-size: 0.78rem;
   color: white;
   text-align: center;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+}
+
+.footer-bottom-sep {
+  margin: 0 0.5rem;
 }

@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home, :about, :contact ]
+  skip_before_action :authenticate_user!, only: [ :home, :about, :contact, :legal, :privacy ]
 
   def home
     @themes = Theme.where(archived: false).with_attached_image.order(:id)
@@ -14,6 +14,12 @@ class PagesController < ApplicationController
   end
 
   def contact
+  end
+
+  def legal
+  end
+
+  def privacy
   end
 
   def images

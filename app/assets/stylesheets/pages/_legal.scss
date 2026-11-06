@@ -1,0 +1,45 @@
+// Mentions légales and Confidentialité: a plain reading column
+.legal-page {
+  padding: 4rem 0 5rem;
+}
+
+.legal-text {
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.75;
+
+  h2 {
+    font-family: $headers-font;
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin: 2.25rem 0 0.75rem;
+    color: $primary-deep;
+  }
+
+  ul { padding-left: 1.2rem; }
+  li + li { margin-top: 0.4rem; }
+}
+
+.legal-title {
+  font-family: $headers-font;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.legal-lead {
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+// Placeholders still to be filled in by the site owner
+.legal-todo {
+  background: #fff3b0;
+  padding: 0 0.2rem;
+}
+
+.legal-updated {
+  margin-top: 2.5rem;
+  font-size: 0.85rem;
+  color: mix($ink, white, 60%);
+}

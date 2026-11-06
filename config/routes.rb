@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # No public sign-up: the only account is the admin's. Editing it stays possible.
+  devise_for :users, skip: :registrations, controllers: { sessions: "users/sessions" }
+  devise_scope :user do
+    get "users/edit", to: "devise/registrations#edit", as: :edit_user_registration
+    match "users", to: "devise/registrations#update", via: %i[patch put], as: :user_registration
+  end
   get "admin", to: redirect("/users/sign_in"), as: :admin_login
   resources :newsletters, only: [ :index, :show ], path: "lettres"
   get "themes/qui-suis-je", to: redirect("/themes/mystere-feminin")
@@ -8,6 +13,8 @@ Rails.application.routes.draw do
   get "auteur", to: "pages#about", as: :about
   get "a-propos", to: redirect("/auteur")
   get "contact", to: "pages#contact", as: :contact
+  get "mentions-legales", to: "pages#legal", as: :legal
+  get "confidentialite", to: "pages#privacy", as: :privacy
   get "images", to: "pages#images", as: :images_index
   post "subscribe", to: "subscriptions#create", as: :subscribe
   post "webhooks/brevo", to: "webhooks#brevo", as: :brevo_webhook

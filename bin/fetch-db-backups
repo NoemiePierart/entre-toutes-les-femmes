@@ -1,0 +1,13 @@
+#!/bin/bash
+# Copies the server's database dumps to this computer, so a server failure
+# does not take the backups with it. Already copied dumps are skipped.
+set -euo pipefail
+
+PROD_HOST="ubuntu@51.75.71.151"
+LOCAL_DIR="${1:-$HOME/Sauvegardes/entre-toutes-les-femmes}"
+
+mkdir -p "$LOCAL_DIR"
+rsync -az --rsync-path="sudo rsync" "$PROD_HOST:/var/backups/etlf/" "$LOCAL_DIR/"
+
+echo "Sauvegardes copiées dans $LOCAL_DIR :"
+ls -lh "$LOCAL_DIR" | tail -n +2

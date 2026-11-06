@@ -21,8 +21,8 @@ class WebhooksController < ApplicationController
   private
 
   def verify_secret
-    expected = ENV["BREVO_WEBHOOK_SECRET"]
-    return if expected.blank?
-    head :unauthorized unless ActiveSupport::SecurityUtils.secure_compare(params[:token].to_s, expected)
+    # Refuses everything when the secret is missing, rather than accepting everything
+    expected = ENV["BREVO_WEBHOOK_SECRET"].to_s
+    head :unauthorized if expected.empty? || !ActiveSupport::SecurityUtils.secure_compare(params[:token].to_s, expected)
   end
 end

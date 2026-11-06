@@ -1,6 +1,11 @@
 class SubscriptionsController < ApplicationController
   skip_before_action :authenticate_user!
 
+  # Keeps anyone from pouring addresses into the Brevo list
+  rate_limit to: 5, within: 10.minutes, only: :create, with: -> {
+    respond_with(:alert, "Trop de tentatives. Réessayez dans quelques minutes.")
+  }
+
   def create
     @email = params[:email].to_s.strip
 

@@ -10,6 +10,10 @@
       <%= f.email_field :email, value: local_assigns[:email], placeholder: "Votre adresse e-mail", required: true, "aria-label": "Votre adresse e-mail" %>
       <%= f.submit "Je m’abonne" %>
     <% end %>
+    <p class="footer-subscribe-note">
+      Votre adresse ne sert qu’à l’envoi de la Lettre. Désinscription en un clic.
+      <%= link_to "Confidentialité", privacy_path %>
+    </p>
     <% if message %>
       <p class="footer-subscribe-error" role="alert"><%= message %></p>
     <% end %>

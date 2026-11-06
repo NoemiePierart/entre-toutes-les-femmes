@@ -1,0 +1,25 @@
+#!/bin/bash
+# Installs a daily dump of the production database on the server (3:15, kept 14 days)
+# and makes a first dump right away. Safe to run again.
+set -euo pipefail
+
+PROD_HOST="ubuntu@51.75.71.151"
+PROD_DB="entre_toutes_les_femmes_production"
+BACKUP_DIR="/var/backups/etlf"
+
+ssh "$PROD_HOST" "sudo bash -s" <<EOF
+set -euo pipefail
+install -d -m 700 -o postgres -g postgres $BACKUP_DIR
+
+cat > /etc/cron.d/etlf-db-backup <<'CRON'
+# Daily dump of the Entre toutes les femmes database, kept 14 days
+15 3 * * * postgres pg_dump -Fc $PROD_DB -f $BACKUP_DIR/etlf-\$(date +\\%F).dump && find $BACKUP_DIR -name '*.dump' -mtime +14 -delete
+CRON
+chmod 644 /etc/cron.d/etlf-db-backup
+
+sudo -u postgres pg_dump -Fc $PROD_DB -f $BACKUP_DIR/etlf-\$(date +%F).dump
+ls -lh $BACKUP_DIR
+EOF
+
+echo ""
+echo "Sauvegarde quotidienne installée. Pour en garder une copie hors du serveur : bin/fetch-db-backups"
