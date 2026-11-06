@@ -14,7 +14,7 @@ class Post < ApplicationRecord
   # stable during the day, so the homepage feels fresh without new content.
   scope :daily_selection, lambda { |date = Date.current|
     joins(:thumbnail_attachment)
-      .order(Arel.sql(sanitize_sql_array(["md5(posts.id::text || ?)", date.iso8601])))
+      .order(Arel.sql(sanitize_sql_array([ "md5(posts.id::text || ?)", date.iso8601 ])))
   }
 
   def to_param

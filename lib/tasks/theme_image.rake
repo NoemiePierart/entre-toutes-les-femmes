@@ -11,6 +11,17 @@ namespace :themes do
     puts "✓ Image de \"#{theme.name}\" définie depuis le post #{post.id} (#{post.title.truncate(50)})"
   end
 
+  desc "List all themes with their current image status"
+  task list: :environment do
+    Theme.order(:id).each do |t|
+      status = t.image.attached? ? "✓ image" : "✗ pas d'image"
+      puts "  [#{t.id}] #{t.name.ljust(30)} #{status}"
+    end
+  end
+end
+
+# Separate block so each namespace block stays short
+namespace :themes do
   desc "Replace theme images whose file in db/seeds/theme_images has changed"
   task sync_images: :environment do
     Theme.order(:id).each do |theme|
@@ -22,14 +33,6 @@ namespace :themes do
         theme.sync_image!
         puts "  ✓ #{theme.name} : image remplacée par #{File.basename(theme.image_file)}"
       end
-    end
-  end
-
-  desc "List all themes with their current image status"
-  task list: :environment do
-    Theme.order(:id).each do |t|
-      status = t.image.attached? ? "✓ image" : "✗ pas d'image"
-      puts "  [#{t.id}] #{t.name.ljust(30)} #{status}"
     end
   end
 end

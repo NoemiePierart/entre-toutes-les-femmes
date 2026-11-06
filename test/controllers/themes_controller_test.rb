@@ -18,7 +18,8 @@ class ThemesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "Cloudinary theme image is served from Cloudinary" do
-    theme = Theme.create!(name: "Mystère féminin")
+    # A name of its own, so the page cannot pick a seeded theme with the same slug
+    theme = Theme.create!(name: "Rubrique servie par Cloudinary")
     blob = ActiveStorage::Blob.create!(
       key: "production-key", filename: "image.jpg", byte_size: 1, checksum: "x",
       content_type: "image/jpeg", service_name: "cloudinary"

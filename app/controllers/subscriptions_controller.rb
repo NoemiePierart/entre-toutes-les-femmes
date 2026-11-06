@@ -4,9 +4,7 @@ class SubscriptionsController < ApplicationController
   def create
     @email = params[:email].to_s.strip
 
-    unless @email.match?(/\A[^@\s]+@[^@\s]+\.[^@\s]+\z/)
-      return respond_with(:alert, "Adresse e-mail invalide.")
-    end
+    return respond_with(:alert, "Adresse e-mail invalide.") unless @email.match?(/\A[^@\s]+@[^@\s]+\.[^@\s]+\z/)
 
     BrevoClient.new.subscribe(@email)
     respond_with(:ok, "Merci ! Vous recevrez bientôt la prochaine lettre.")
@@ -22,13 +20,15 @@ class SubscriptionsController < ApplicationController
   # Turbo replaces the form with the answer in place; plain requests keep the flash
   def respond_with(status, message)
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: answer_stream(status, message), status: status == :ok ? :ok : :unprocessable_entity }
+      format.turbo_stream do
+        render turbo_stream: answer_stream(status, message), status: status == :ok ? :ok : :unprocessable_entity
+      end
       format.html { redirect_back fallback_location: root_path, (status == :ok ? :notice : :alert) => message }
     end
   end
 
   def answer_stream(status, message)
-    turbo_stream.replace("footer-subscribe", partial: "shared/subscribe_form",
-                         locals: { status: status, message: message, email: @email })
+    locals = { status: status, message: message, email: @email }
+    turbo_stream.replace("footer-subscribe", partial: "shared/subscribe_form", locals: locals)
   end
 end

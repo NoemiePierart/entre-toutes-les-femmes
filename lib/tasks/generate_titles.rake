@@ -38,7 +38,7 @@ namespace :posts do
       req.body = JSON.generate({
         model: "claude-haiku-4-5-20251001",
         max_tokens: 60,
-        messages: [{ role: "user", content: prompt }]
+        messages: [ { role: "user", content: prompt } ]
       })
 
       res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(req) }

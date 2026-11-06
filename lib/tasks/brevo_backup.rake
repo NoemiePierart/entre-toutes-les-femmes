@@ -54,11 +54,11 @@ namespace :brevo do
 
         raw_ct = image_data[:content_type].to_s
         ext = case raw_ct
-              when /png/  then "png"
-              when /gif/  then "gif"
-              when /webp/ then "webp"
-              else "jpg"
-              end
+        when /png/  then "png"
+        when /gif/  then "gif"
+        when /webp/ then "webp"
+        else "jpg"
+        end
 
         filename = "#{Digest::SHA1.hexdigest(url)[0..11]}.#{ext}"
         File.binwrite(images_dir.join(filename), image_data[:body])

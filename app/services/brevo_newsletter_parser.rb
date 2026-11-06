@@ -76,9 +76,10 @@ class BrevoNewsletterParser
     @sections = []
 
     h1s.each_with_index do |h1, idx|
-      theme_name    = h1.text.strip.gsub(/\s+/, " ")
+      theme_name = h1.text.strip.gsub(/\s+/, " ")
       matched_heading = (KNOWN_THEMES + THEME_ALIASES.keys).find { |t| theme_name.start_with?(t) }
       next unless matched_heading
+
       matched_theme = THEME_ALIASES.fetch(matched_heading, matched_heading)
 
       nodes = collect_nodes_until(h1, h1s[idx + 1])
